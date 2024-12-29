@@ -7,44 +7,33 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PatientRepository::class)]
-#[ORM\Table(name: "patient", uniqueConstraints: [
-    new ORM\UniqueConstraint(name: "cnp_unique", columns: ["cnp"])
-])]
+#[ORM\Table(name: "patient")]
 class Patient
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
     #[ORM\Column(length: 50)]
     private string $cnp ;
 
-    #[ORM\Column(length: 50)]
-    private ?string $firstName = null;
+    #[ORM\Column(length: 50, nullable: false)]
+    private string $firstName;
 
-    #[ORM\Column(length: 255)]
-    private ?string $lastName = null;
+    #[ORM\Column(length: 255, nullable: false)]
+    private string $lastName;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $birthDate = null;
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: false)]
+    private \DateTimeInterface $birthDate;
 
-    #[ORM\Column]
-    private ?int $age = null;
+    #[ORM\Column(nullable: false)]
+    private int $age;
 
-    #[ORM\Column(length: 255)]
-    private ?string $adress = null;
+    #[ORM\Column(length: 255, nullable: false)]
+    private string $address;
 
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
+    #[ORM\Column(length: 255, nullable: false)]
+    private string $email;
 
-    #[ORM\Column(length: 255)]
-    private ?string $phone = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    #[ORM\Column(length: 255, nullable: false)]
+    private string $phone;
 
     public function getCnp(): ?string
     {
@@ -106,14 +95,14 @@ class Patient
         return $this;
     }
 
-    public function getAdress(): ?string
+    public function getAddress(): ?string
     {
-        return $this->adress;
+        return $this->address;
     }
 
-    public function setAdress(string $adress): static
+    public function setAddress(string $address): static
     {
-        $this->adress = $adress;
+        $this->address = $address;
 
         return $this;
     }
