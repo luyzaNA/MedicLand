@@ -28,6 +28,11 @@ security:
             pattern: ^/api/register
             stateless: true
             security: false
+        
+        logout:
+            pattern: /api/logout
+            stateless: true
+            security: false
 
         api:
             pattern: ^/api
