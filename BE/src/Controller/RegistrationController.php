@@ -56,4 +56,24 @@ class RegistrationController extends AbstractController
             return new JsonResponse(['error' => $e->getMessage()], 400);
         }
     }
+
+
+    #[Route('/api/me', name: 'api_me', methods: ['GET'])]
+    public function getMe(): JsonResponse
+    {
+        $doctor = $this->registerService->getAuthenticatedDoctor();
+
+        if (!$doctor) {
+            return new JsonResponse(['error' => 'Unauthorized'], 401);
+        }
+
+        return new JsonResponse([
+            'email' => $doctor->getEmail(),
+            'cnp' => $doctor->getCnp(),
+            'firstName' => $doctor->getFirstName(),
+            'lastName' => $doctor->getLastName(),
+            'specialization' => $doctor->getSpecialization(),
+            'role' => $doctor->getRole(),
+        ]);
+    }
 }

@@ -7,13 +7,16 @@ use App\Repository\DoctorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
+
 class RegisterService
 {
 
     public function __construct(private DoctorRepository $doctorRepository, 
                                 private  EntityManagerInterface $entityManager, 
                                 private  JWTTokenManagerInterface $jwtManager,
-                                private  UserPasswordHasherInterface $passwordHasher
+                                private  UserPasswordHasherInterface $passwordHasher,
+                                private Security $security
                                )
     { }
 
@@ -67,5 +70,14 @@ class RegisterService
         ];
     }
 
+    public function getAuthenticatedDoctor(): ?Doctor
+    {
+        $user = $this->security->getUser();
+
+        if ($user instanceof Doctor) {
+            return $this->doctorRepository->findByCnp($user->getCnp()); 
+        }
+        return null; 
+    }
 }
 
