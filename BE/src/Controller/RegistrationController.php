@@ -58,7 +58,7 @@ class RegistrationController extends AbstractController
     }
 
 
-    #[Route('/api/me', name: 'api_me', methods: ['GET'])]
+    #[Route(path: '/api/me', name: 'api_me', methods: ['GET'])]
     public function getMe(): JsonResponse
     {
         $doctor = $this->registerService->getAuthenticatedDoctor();
@@ -75,5 +75,12 @@ class RegistrationController extends AbstractController
             'specialization' => $doctor->getSpecialization(),
             'role' => $doctor->getRole(),
         ]);
+    }
+
+    #[Route(path: '/api/logout', name: 'api_logout', methods: ['POST'])]
+
+    public function logout(): JsonResponse
+    {
+        return new JsonResponse(['status' => 'Logged out successfully'], 200);
     }
 }
