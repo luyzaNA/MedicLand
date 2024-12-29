@@ -33,7 +33,7 @@ class PatientService
         $patient->setLastName($data['lastName']);
         $patient->setBirthDate(new \DateTime($data['birthDate']));
         $patient->setAge($data['age']);
-        $patient->setAdress($data['adress']);
+        $patient->setAddress($data['address']);
         $patient->setEmail($data['email']);
         $patient->setPhone($data['phone']);
 
@@ -53,7 +53,7 @@ class PatientService
         $patient->setLastName($data['lastName'] ?? $patient->getLastName());
         $patient->setBirthDate(isset($data['birthDate']) ? new \DateTime($data['birthDate']) : $patient->getBirthDate());
         $patient->setAge($data['age'] ?? $patient->getAge());
-        $patient->setAdress($data['adress'] ?? $patient->getAdress());
+        $patient->setAddress($data['address'] ?? $patient->getAddress());
         $patient->setEmail($data['email'] ?? $patient->getEmail());
         $patient->setPhone($data['phone'] ?? $patient->getPhone());
 
