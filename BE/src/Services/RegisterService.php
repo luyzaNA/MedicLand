@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Entity\Doctor;
+use App\Entity\Specialization;
 use App\Repository\DoctorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -37,7 +38,7 @@ class RegisterService
         return $this->jwtManager->create($user);
     }
 
-    public function register(string $email, string $cnp, string $password, string $firstName, string $lastName, string $specialization): array
+    public function register(string $email, string $cnp, string $password, string $firstName, string $lastName, Specialization $specialization): array
     {
         $existingDoctorByEmail = $this->doctorRepository->findByEmail($email);
         if ($existingDoctorByEmail) {
