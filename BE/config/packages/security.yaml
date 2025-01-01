@@ -1,12 +1,12 @@
 security:
     password_hashers:
-        App\Entity\Doctor:
+        App\Entity\User:
             algorithm: auto
 
     providers:
         app_user_provider:
             entity:
-                class: App\Entity\Doctor
+                class: App\Entity\User
                 property: email
 
     firewalls:
@@ -15,7 +15,7 @@ security:
             security: false
 
         login:
-            pattern:  ^/api/login
+            pattern: ^/api/login
             stateless: true
             json_login:
                 check_path: /api/login
@@ -24,6 +24,21 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
+        register:
+            pattern: ^/api/register
+            stateless: true
+            security: false
+
+        register_admin:
+            pattern: ^/api/register_admin
+            stateless: true
+            security: false
+
+        logout:
+            pattern: /api/logout
+            stateless: true
+            security: false
+
         api:
             pattern: ^/api
             stateless: true
@@ -31,4 +46,6 @@ security:
 
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/register_admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
