@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
-use App\Entity\Doctor;
 use App\Entity\Specialization;
-use App\Repository\DoctorRepository;
+use App\Entity\User;
+use App\Repository\SpecializationRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -12,14 +13,14 @@ use Symfony\Bundle\SecurityBundle\Security;
 
 class RegisterService
 {
-
-    public function __construct(private DoctorRepository $doctorRepository, 
-                                private  EntityManagerInterface $entityManager, 
-                                private  JWTTokenManagerInterface $jwtManager,
-                                private  UserPasswordHasherInterface $passwordHasher,
-                                private Security $security
-                               )
-    { }
+    public function __construct(
+        private UserRepository $userRepository,
+        private SpecializationRepository $specializationRepository,
+        private  EntityManagerInterface $entityManager,
+        private  JWTTokenManagerInterface $jwtManager,
+        private  UserPasswordHasherInterface $passwordHasher,
+        private Security $security
+    ) {}
 
     public function login(array $credentials): ?string
     {
@@ -27,43 +28,35 @@ class RegisterService
         $password = $credentials['password'] ?? null;
 
         if (!$email || !$password) {
-            return null; 
+            return null;
         }
 
-        $user = $this->doctorRepository->findOneByEmail( $email);
+        $user = $this->userRepository->findByEmail($email);
+
 
         if (!$user || !$this->passwordHasher->isPasswordValid($user, $password)) {
-            return null; 
+            return null;
         }
+
         return $this->jwtManager->create($user);
     }
 
-    public function register(string $email, string $cnp, string $password, string $firstName, string $lastName, Specialization $specialization): array
+    public function register(string $email, ?string $cnp = null, string $password, ?string $firstName = null, ?string $lastName = null, ?Specialization $specialization = null, string $role): array
     {
-        $existingDoctorByEmail = $this->doctorRepository->findByEmail($email);
-        if ($existingDoctorByEmail) {
-            throw new \Exception('Email already in use');
-        }
+        $user = new User();
+        $user->setEmail($email);
+        $user->setCnp($cnp);
+        $user->setFirstName($firstName);
+        $user->setLastName($lastName);
+        $user->setSpecialization($specialization);
+        $user->setRole($role);
 
-        $existingDoctorByCnp = $this->doctorRepository->findByCnp($cnp);
-        if ($existingDoctorByCnp) {
-            throw new \Exception('CNP already in use');
-        }
+        $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
+        $user->setPassword($hashedPassword);
 
-        $doctor = new Doctor();
-        $doctor->setEmail($email);
-        $doctor->setCnp($cnp);
-        $doctor->setFirstName($firstName);
-        $doctor->setLastName($lastName);
-        $doctor->setSpecialization($specialization);
-        $doctor->setRole('DOCTOR'); 
+        $this->userRepository->save($user);
 
-        $hashedPassword = $this->passwordHasher->hashPassword($doctor, $password);
-        $doctor->setPassword($hashedPassword);
-
-        $this->doctorRepository->save($doctor);
-
-        $token = $this->jwtManager->create($doctor);
+        $token = $this->jwtManager->create($user);
 
         return [
             'status' => 'User registered successfully',
@@ -71,14 +64,13 @@ class RegisterService
         ];
     }
 
-    public function getAuthenticatedDoctor(): ?Doctor
+    public function getAuthUser(): ?User
     {
         $user = $this->security->getUser();
 
-        if ($user instanceof Doctor) {
-            return $this->doctorRepository->findByCnp($user->getCnp()); 
+        if ($user instanceof User) {
+            return $this->userRepository->findByEmail($user->getEmail());
         }
-        return null; 
+        return null;
     }
 }
-
