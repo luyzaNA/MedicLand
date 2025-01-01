@@ -27,14 +27,16 @@ class Doctor implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     private string $email;
 
-    #[ORM\Column(length: 255)]
-    private string $specialization;
+    #[ORM\ManyToOne(targetEntity: Specialization::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private Specialization $specialization;
 
     #[ORM\Column(length: 50)]
     private string $role;
 
     #[ORM\Column]
     private string $password;
+
     
     public function getCnp(): ?string
     {
@@ -80,17 +82,16 @@ class Doctor implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
   
-    public function getSpecialization(): ?string
+    public function getSpecialization(): ?Specialization
     {
         return $this->specialization;
     }
 
-    public function setSpecialization(string $specialization): static
+    public function setSpecialization(Specialization $specialization): static
     {
         $this->specialization = $specialization;
         return $this;
     }
-
     public function getRole(): ?string
     {
         return $this->role;
@@ -112,7 +113,7 @@ class Doctor implements UserInterface, PasswordAuthenticatedUserInterface
         $this->password = $password;
         return $this;
     }
-    
+
     public function getUserIdentifier(): string
     {
         return $this->email; 
