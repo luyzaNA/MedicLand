@@ -8,37 +8,22 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
-<<<<<<< Updated upstream
-use Symfony\Component\Serializer\SerializerInterface;
-=======
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
->>>>>>> Stashed changes
 
 class SpecializationController extends AbstractController
 {
     public function __construct(
         private Security $security,
-<<<<<<< Updated upstream
-        private SerializerInterface $serializerInterface,
-        private SpecializationService $specializationService
-    ) {}
-
-
-=======
         private SpecializationService $specializationService,
         private ValidatorInterface $validator
-    ) {}
+) {}
 
->>>>>>> Stashed changes
     #[Route('/api/specialization', name: 'api_add_specialization', methods: ['POST'])]
     public function addSpecialization(Request $request): JsonResponse
     {
         $authUser = $this->security->getUser();
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
         $roles = $authUser->getRoles();
 
         if (!in_array('admin', $roles)) {
@@ -47,15 +32,6 @@ class SpecializationController extends AbstractController
 
         $data = json_decode($request->getContent(), true);
 
-<<<<<<< Updated upstream
-        try {
-            $name = $data['name'] ?? null;
-
-            $specialization = $this->specializationService->addSpecialization($name);
-            return new JsonResponse([
-                'name' => $specialization->getName()
-            ], 201);        } catch (\Exception $e) {
-=======
         $constraints = new Assert\Collection([
             'name' => [new Assert\NotBlank(), new Assert\Length(['min' => 3])],
         ]);
@@ -76,7 +52,6 @@ class SpecializationController extends AbstractController
 
             return new JsonResponse(['name' => $specialization->getName()], 201);
         } catch (\Exception $e) {
->>>>>>> Stashed changes
             return new JsonResponse(['error' => $e->getMessage()], 400);
         }
     }
@@ -100,8 +75,4 @@ class SpecializationController extends AbstractController
             return new JsonResponse(['error' => $e->getMessage()], 400);
         }
     }
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 }

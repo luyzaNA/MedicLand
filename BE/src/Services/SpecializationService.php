@@ -33,11 +33,7 @@ class SpecializationService
             $this->specializationRepository->remove($specialization);
         }
     }
-<<<<<<< Updated upstream
-    
-=======
 
->>>>>>> Stashed changes
     public function getSpecialization($name): ?Specialization
     {
         return $this->specializationRepository->findSpecialization($name);
