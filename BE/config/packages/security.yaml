@@ -24,24 +24,6 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
-<<<<<<< Updated upstream
-=======
-        register:
-            pattern: ^/api/register
-            stateless: true
-            security: false
-       
-        register_admin:
-            pattern: ^/api/register_admin
-            stateless: true
-            security: false
-        
-        logout:
-            pattern: /api/logout
-            stateless: true
-            security: false
-
->>>>>>> Stashed changes
         api:
             pattern: ^/api
             stateless: true
@@ -49,9 +31,5 @@ security:
 
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-<<<<<<< Updated upstream
-=======
         - { path: ^/api/register, roles: IS_AUTHENTICATED_ANONYMOUSLY } 
-        - { path: ^/api/register_admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
->>>>>>> Stashed changes
-        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
