@@ -2,10 +2,15 @@
 
 namespace App\Entity;
 
+<<<<<<< Updated upstream
 use App\Repository\SpecializationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 
+=======
+use Doctrine\ORM\Mapping as ORM;
+
+>>>>>>> Stashed changes
 #[ORM\Entity]
 #[ORM\Table(name: "specialization", uniqueConstraints: [
     new ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_NAME', columns: ['name'])
