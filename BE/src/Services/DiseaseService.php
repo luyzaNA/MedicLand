@@ -32,10 +32,9 @@ class DiseaseService
     public function deleteDdisease(string $name): void
     {
         $disease = $this->diseaseRepositorye->findDisease($name);
+
         if($disease){
          $this->diseaseRepositorye->remove($disease);
         }
     }
-
-
 }
