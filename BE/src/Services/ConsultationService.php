@@ -4,7 +4,9 @@ namespace App\Services;
 
 use App\Entity\Consultation;
 use App\Entity\User;
+use App\Entity\Disease;
 use App\Repository\ConsultationRepository;
+use App\Repository\DiseaseRepository;
 use App\Repository\PatientRepository;
 use App\Repository\SpecializationRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,14 +14,14 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class ConsultationService
 {
-
     public function __construct(
         private SpecializationRepository $specializationRepository,
         private  EntityManagerInterface $entityManager,
         private SerializerInterface $serializer,
         private ConsultationRepository $consultationRepository,
-        private PatientRepository $patientRepository
-    ) {}
+        private PatientRepository $patientRepository,
+        private DiseaseRepository $diseaseRepository,
+) {}
 
     public function serializeConsultation(Consultation $consultation): array
     {
@@ -48,25 +50,31 @@ class ConsultationService
         ];
     }
 
+public function addConsultation(string $patient_cnp, User $doctor, \DateTimeInterface $date, array $diseases = [], array $medication = []): Consultation
+{
+    $patient = $this->patientRepository->findByCnp($patient_cnp);
     
+    $consultation = new Consultation();
+    $consultation->setPatient($patient)
+                ->setDoctor($doctor)
+                ->setDate($date)
+                ->setMedication($medication);
 
-    public function addConsultation(string $patient_cnp, User $doctor, \DateTimeInterface $date, array $diseases = [], ?string $medication = null): Consultation
-    {
 
-        $patient = $this->patientRepository->findByCnp($patient_cnp);
-    
-        $consultation = new Consultation();
-        $consultation->setPatient($patient)
-                    ->setDoctor($doctor)
-                    ->setDate($date)
-                    ->setMedication($medication);
+    foreach ($diseases as $diseaseName) {
+        $disease = $this->diseaseRepository->findOneBy(['name' => $diseaseName]);
 
-        foreach ($diseases as $disease) {
+        if ($disease) {
+            $consultation->addDiagnostic($disease);
+        } else {
+            $disease = new Disease();
+            $disease->setName($diseaseName);
+            $this->diseaseRepository->save($disease);
             $consultation->addDiagnostic($disease);
         }
-
+    }
         $this->consultationRepository->add($consultation);
 
-        return $consultation;
-    }
+    return $consultation;
+}
 }
