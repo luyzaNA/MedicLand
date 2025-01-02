@@ -63,14 +63,4 @@ class RegisterService
             'token' => $token,
         ];
     }
-
-    public function getAuthUser(): ?User
-    {
-        $user = $this->security->getUser();
-
-        if ($user instanceof User) {
-            return $this->userRepository->findByEmail($user->getEmail());
-        }
-        return null;
-    }
 }
