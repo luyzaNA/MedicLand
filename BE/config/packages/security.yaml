@@ -2,7 +2,7 @@ security:
     password_hashers:
         App\Entity\User:
             algorithm: auto
-    
+
     providers:
         app_user_provider:
             entity:
@@ -13,9 +13,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        
+
         login:
-            pattern:  ^/api/login
+            pattern: ^/api/login
             stateless: true
             json_login:
                 check_path: /api/login
