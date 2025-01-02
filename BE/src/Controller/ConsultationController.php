@@ -73,11 +73,9 @@ class ConsultationController extends AbstractController
 
         $date = new \DateTime(); 
 
-        // $medication = $data['medication'] ?? [];
-        
-        // $diseases = $request->get('diseases', []);
         $diseases = $data['diseases'] ?? [];
         $medication = $data['medication'] ?? [];
+        
         try {
             $consultation = $this->consultationService->addConsultation(
                 $patient,
