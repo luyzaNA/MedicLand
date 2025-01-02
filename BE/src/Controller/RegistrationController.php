@@ -10,6 +10,8 @@ use App\Services\RegisterService;
 use App\Services\SpecializationService;
 use Symfony\Component\HttpFoundation\Request;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
+use App\Entity\User;
 
 class RegistrationController extends AbstractController
 {
@@ -18,8 +20,9 @@ class RegistrationController extends AbstractController
         private UserPasswordHasherInterface $passwordHasher,
         private RegisterService $registerService,
         private SpecializationService $specializationService,
-        private JWTTokenManagerInterface $jwtManager
-    ) {}
+        private JWTTokenManagerInterface $jwtManager,
+        private Security $security       
+) {}
 
     #[Route('/api/register', name: 'api_register', methods: ['POST'])]
     public function register(Request $request): JsonResponse
@@ -74,9 +77,9 @@ class RegistrationController extends AbstractController
     #[Route('/api/auth/user', name: 'api_get_auth_user', methods: ['GET'])]
     public function getAuthUserDetails(): JsonResponse
     {
-        $user = $this->registerService->getAuthUser();
 
-        if (!$user) {
+        $user = $this->getUser();        
+        if (!$user instanceof User) {
             return new JsonResponse(['error' => 'Unauthorized - No authenticated user'], 401);
         }
 
@@ -86,7 +89,8 @@ class RegistrationController extends AbstractController
             'roles' => $user->getRoles(),
             'firstName' => $user->getFirstName(),
             'lastName' => $user->getLastName(),
-            'specialization' => $user->getSpecialization() ? $user->getSpecialization()->getName() : null,  // Numele specializării
+
+            'specialization' => $user->getSpecialization()->getName(),  
         ]);
     }
 
