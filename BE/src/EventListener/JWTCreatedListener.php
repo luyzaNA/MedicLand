@@ -35,7 +35,7 @@ public function onJWTCreated(JWTCreatedEvent $event)
 
     $user = $this->userRepository->findByEmail($email);
 
-    $payload['specialization'] = $user->getSpecialization()->getName();
+    $payload['specialization'] = $user->getSpecialization()?->getName();
     $payload['firstName'] = $user->getFirstName();
     $payload['lastName'] = $user->getLastName();
 

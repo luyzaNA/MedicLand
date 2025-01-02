@@ -13,7 +13,7 @@ class PatientService
     public function __construct(private PatientRepository $patientRepository, 
                                 private  EntityManagerInterface $entityManager,
                                 private SerializerInterface $serializer)
-    { }
+    {}
 
     public function serializePatient(Patient $patient): string
     {
