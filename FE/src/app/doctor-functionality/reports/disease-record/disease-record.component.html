@@ -1,0 +1,63 @@
+<body>
+
+<div class="disease-record">
+    <form (ngSubmit)="searchDiseaseAndPatients(diseaseInput.value)" #searchForm="ngForm" method="GET">
+        <h2>Search Disease</h2>
+
+        <div class="search-input">
+            <label for="diseaseName">Name:</label>
+            <input type="text" id="diseaseName" #diseaseInput placeholder="Search by disease name" />
+            <button type="submit" [disabled]="searchForm.invalid" class="btn-search">Search</button>
+        </div>
+    </form>
+
+    <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+      
+      <div *ngIf="disease">
+        <div class="container" id="content">
+
+        <h2>DISEASE REPORT</h2>
+
+      
+      <div *ngIf="patients.length > 0">
+        <h2>Patients with {{disease.name | uppercase}}</h2>
+        <h3> - Doctor {{ doctorName}} - </h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Sex</th>
+              <th>CNP</th>
+              <th>Locality</th>
+              <th>RH/Blood Group</th>
+              <th>Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let patient of patients">
+              <td>{{ patient.name }}</td>
+              <td>{{ patient.age }}</td>
+              <td>{{ patient.sex }}</td>
+              <td>{{ patient.cnp }}</td>
+              <td>{{ patient.locality }}</td>
+              <td>{{ patient.rhBloodGroup }}</td>
+              <td>{{ patient.phone }}</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>  
+        <div class="footer">
+            <div style="text-align: center; padding: 10px;">
+                Generated on {{ (datePipe.transform(currentDate, 'dd.MM.yyyy'))! }}
+            </div>
+        </div>
+      </div>
+      
+      </div>
+</div>
+<button *ngIf="patients.length>0" (click)="generatePDF()" class="btn-generate-pdf">Generate PDF</button>
+
+      

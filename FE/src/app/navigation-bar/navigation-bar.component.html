@@ -1,0 +1,27 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    <video class="logo"
+           src="../assets/logo.mp4"
+           type="video/mp4"
+           loop
+           autoplay
+           [muted]="true"
+    ></video>
+  </div>
+  <div class="navbar-right">
+    <button class="btn-home" (click)="navigateToHome()">
+      <mat-icon>home</mat-icon> Home
+    </button>
+
+    <ng-container *ngIf="!isAuthenticated; else loggedIn">
+      <button class="btn-auth" (click)="navigateToAuth()">
+        <mat-icon>login</mat-icon> Authenticate
+      </button>
+    </ng-container>
+    <ng-template #loggedIn>
+      <button class="btn-logout" (click)="logout()">
+        <mat-icon>logout</mat-icon> Logout
+      </button>
+    </ng-template>
+  </div>
+</nav>

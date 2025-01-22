@@ -1,0 +1,127 @@
+.footer {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .footer-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* Aranjează elementele vertical */
+    gap: 20px; /* Spațiu între elemente */
+}
+  
+  .footer-center {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .footer-center .logo {
+    max-width: 100px;
+    height: auto;
+  }
+  
+  .footer-right {
+    flex: 1;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 50px;
+  }
+  
+  .email-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  .address-link {
+    text-decoration: none;
+    color: #007bff;
+    display: flex;
+    flex-direction: column; /* Elemente aranjate vertical */
+    align-items:  center; /* Aliniere la stânga */
+    gap: 5px; /* Spațiu între text și imagine */
+  }
+  .address-link.active {
+    font-weight: bold;
+    border-bottom: 2px solid #8b61c2;
+  }
+  
+  .location-img {
+    width: 250px;
+    height: auto;
+    margin-left: 0; /* Elimină orice indentare */
+  }
+  
+  
+  .location-text {
+    color: #8b61c2;
+    margin-bottom: 10px; /* Spațiu sub text */
+    text-align: center; /* Text aliniat la stânga */
+}
+.footer-bottom {
+    color: #333333;
+  }
+  
+  
+.location-img {
+    width: 150px;
+    height: auto;
+    margin-left: 0; /* Elimină indentarea imaginii */
+}
+  
+  .footer-bottom {
+    text-align: center;
+    font-size: 0.9em;
+    color: #555555ac;
+    font-family: "Gill Sans", sans-serif;
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      align-items: center; /* Centrează tot conținutul */
+    }
+  
+    .footer-left {
+      flex: unset;
+      width: 100%;
+      margin-bottom: 15px;
+      align-items: center; /* Centrează secțiunea de contact */
+      text-align: center; /* Aliniază textul pe centru */
+    }
+  
+    .contact-item {
+      display: flex;
+      flex-direction: column; /* Aranjează iconițele și textul vertical */
+      align-items: center; /* Centrează elementele în cadrul secțiunii de contact */
+      gap: 10px; /* Spațiu între iconițe și text */
+      margin-top: 0; /* Elimină distanța prea mare de sus */
+    }
+  
+    .email-link {
+      display: flex;
+      flex-direction: column; /* Aranjează iconițele și textul vertical */
+      align-items: center; /* Centrează iconițele și textul */
+    }
+    
+    .location-img {
+      width: 120px;
+    }
+    
+    .footer-center .logo {
+      max-width: 80px;
+    }
+  }
+  
+  

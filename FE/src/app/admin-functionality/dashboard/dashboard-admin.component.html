@@ -1,0 +1,33 @@
+<div class="dashboard">
+    <div class="greeting">
+      <h1>Hello, {{ name }}!</h1>
+      <p>What would you like to manage now?</p>
+    </div>
+    
+    <div class="options">
+      <div class="option" routerLink="./Accounts">
+        <video 
+          src="../../assets/admin/userDashboard.mp4"
+          type="video/mp4"
+          loop
+          autoplay
+          [muted]="true"
+         >
+=
+        </video>
+        <p>Accounts</p>
+      </div>
+      <div class="option" routerLink="./Specialization">
+        <video 
+          src="../../assets/admin/specializationDashboard.mp4"
+          type="video/mp4"
+          loop
+          autoplay
+          [muted]="true"
+          >
+        </video>
+        <p>Specialization</p>
+      </div>
+    </div>
+  </div>
+  

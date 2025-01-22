@@ -1,0 +1,303 @@
+<div class="container">
+    <form (ngSubmit)="onSearch()" #searchForm="ngForm" method="GET" >
+        <h2>Search Consultation</h2>
+
+
+        <label for="cnp">NR:</label>
+        <input type="text" id="nr" name="nr" [(ngModel)]="nr" class="search" required
+            placeholder="e.g., 124">
+
+<button type="submit" [disabled]="searchForm.invalid" class=" btn-search">Search</button>
+
+        <div *ngIf="noResultsMessage" class="no-results">No patient found with the given CNP.</div>
+    </form>
+
+    <div *ngIf="patient.firstName">
+        <mat-accordion>
+
+            <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title> Edit consultation </mat-panel-title>
+
+                </mat-expansion-panel-header>
+    
+    <form (ngSubmit)="updateConsultation()" #consultationForm="ngForm" method="POST" >
+       
+        <div class="info1">
+
+        <h3>Symptoms:</h3>
+        <span>Old symptoms</span><input [value]="oldSymptoms" disabled readonly>
+        <textarea name="symptoms"
+        class="symptoms" [(ngModel)]="consultation.symptoms" placeholder="Symptoms"></textarea>
+
+        <h3>Medication:</h3>
+        <span>Old medicatipn</span><input [value]="oldMedication" disabled readonly>
+        <textarea name="medication"
+        class="medication" [(ngModel)]="consultation.medication" placeholder="medication"></textarea>
+    </div>
+    <div class="info2">
+
+        <div class="info5">
+            <h3>Diseases</h3>
+            <span>Old diseases</span><input [value]="oldDiseases" disabled readonly>
+            <div class="diseases-row">
+              <label for="diseaseName">Name:</label>
+              <input type="text" name="diseases[0][name]" class="diseases-name" #diseaseNameModel="ngModel" [(ngModel)]="disease.name"  placeholder="e.g., Diabetes, Hepatitis">
+              
+        
+              <label for="diseaseCategory">Category:</label>
+              <select name="diseases[0][category]" class="diseases-category" #diseaseCategoryModel="ngModel" [(ngModel)]="disease.category" >
+                <option value="Infectious">Infectious</option>
+                <option value="Chronic">Chronic</option>
+                <option value="Genetic">Genetic</option>
+                <option value="Autoimmune">Autoimmune</option>
+                <option value="Other">Other</option>
+              </select>
+            
+            </div>
+        
+        
+            <label for="diseaseDescription">Disease Description:</label>
+            <textarea name="diseases[0][description]"
+             class="diseases-description" [(ngModel)]="disease.description" placeholder="Details about the disease"></textarea>
+        <div>
+          <button type="button" (click)="add_disease()" [disabled]="!disease.name" class="add-disease">Add Disease</button>
+        </div>
+        </div>
+
+
+        <button type="submit" [disabled]="consultationForm.invalid" class="add-btn">Update specialization</button>
+    </div>
+
+    </form>
+      </mat-expansion-panel>
+      </mat-accordion>
+    <div class="exp1">
+    <mat-accordion>
+
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+            <mat-expansion-panel-header>
+                <mat-panel-title> Patient </mat-panel-title>
+
+            </mat-expansion-panel-header>
+            <div class="info1">
+                <h3>Contact Information</h3>
+                <div class="contact-row">
+
+                    <label for="email">Email:</label>
+                    <input type="email" class="column-contact" id="email" email name="email" [value]="patient.email" readonly disabled>
+
+
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" class="column-contact" name="phone" [value]="patient.phone" readonly disabled>
+
+                </div>
+            </div>
+
+            <div class="info2">
+                <h3>Personal Information</h3>
+                <div class="name-row">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" class="column-name" name="firstName" [value]="patient.firstName" readonly disabled>
+
+
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" readonly class="column-name" name="lastName"
+                        [value]="patient.lastName" disabled>
+
+                </div>
+
+
+
+                <label for="cnp" class="label-cnp">Cnp:</label>
+                <input type="text" id="cnp" [value]="patient.cnp" name="cnp" class="cnp-row" readonly disabled />
+
+                <div class="personal-info-row">
+                    <label for="sex">Gender:</label>
+                    <select id="sex" class="column-sex" name="sex" [value]="patient.sex" disabled>
+                        <option value="M">M</option>
+                        <option value="F">F</option>
+                    </select>
+
+
+                    <label for="birthDate">Birth date:</label>
+                    <input class="column-birthdate" disabled [value]="patient.birthDate | date:'mediumDate'" readonly>
+
+
+                    <label for="age">Age:</label>
+                    <input type="text" id="age" name="age" class="column-age" [value]="patient.age" disabled readonly>
+
+
+
+                    <label for="occupation">Occupation:</label>
+                    <input type="text" id="occupation" name="occupation" class="column-occupation"
+                        [value]="patient.occupation" readonly disabled>
+
+                </div>
+            </div>
+
+            <div class="info1">
+                <h3>Address</h3>
+                <div class="adress1-row">
+                    <label for="locality">City:</label>
+                    <input type="text" id="locality" class="column-adress" name="locality" [value]="patient.locality"
+                        disabled readonly>
+
+
+                    <label for="street">Street:</label>
+                    <input type="text" id="street" name="street" class="column-adress" [value]="street" readonly
+                        disabled>
+
+                </div>
+
+                <div class="adress2-row">
+                    <label for="number">No:</label>
+                    <input type="text" id="number" class="column-adress2" name="number" [value]="number" readonly
+                        disabled>
+
+
+                    <label for="block">Block:</label>
+                    <input type="text" id="block" class="column-adress2" name="block" [value]="block" disabled readonly>
+
+                    <label for="staircase">Staircase:</label>
+                    <input type="text" id="staircase" class="column-adress2" name="staircase" [value]="staircase"
+                        disabled readonly>
+
+
+
+                    <label for="apartment">Ap:</label>
+                    <input type="text" class="column-adress2" id="apartment" name="apartment" [value]="apartment"
+                        readonly disabled>
+
+
+                    <label for="floor">Floor:</label>
+                    <input type="text" class="column-adress2" id="floor" [value]="floor" readonly disabled>
+
+
+                </div>
+            </div>
+
+            <div class="info2">
+                <h3>Medical Information</h3>
+                <div class="medical1-row">
+                    <label for="bloodGroup">Blood Type:</label>
+                    <select id="bloodGroup" name="bloodGroup" class="column-blood" readonly disabled
+                        [value]="patient.bloodGroup">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="O">O</option>
+                        <option value="AB">AB</option>
+                    </select>
+
+
+                    <label for="rh">Rh Factor:</label>
+                    <select id="rh" name="rh" class="column-medicalM" readonly disabled [value]="patient.rh">
+                        <option value="NEGATIV">Negative</option>
+                        <option value="POZITIV">Positive</option>
+                    </select>
+
+
+                    <label for="weight">Weight (kg):</label>
+                    <input type="text" step="0.1" id="weight" class="column-medicalS" name="weight" readonly disabled
+                        [value]="patient.weight">
+
+
+                    <label for="height">Height (cm):</label>
+                    <input type="text" step="0.1" id="height" class="column-medicalS" readonly disabled name="height"
+                        [value]="patient.height">
+
+
+                </div>
+
+
+
+
+
+
+                <h3>Allergies</h3>
+                <textarea id="allergies" name="allergies" class="medical2-row" [value]="patient.allergies" disabled
+                    readonly></textarea>
+            </div>
+            <div class="info1">
+                <h3>Medical History</h3>
+            
+                <table *ngIf="patient.diseases?.length; else noDiseases" class="diseases-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let disease of patient.diseases">
+                            <td><strong>{{ disease.name }}</strong></td>
+                            <td *ngIf="disease.category">{{ disease.category }}</td>
+                            <td>{{ disease.description || '-' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            
+                <ng-template #noDiseases>
+                    <p>No diseases listed.</p>
+                </ng-template>
+            </div>
+            
+           
+
+
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+<div class="exp2">
+    <mat-accordion>
+
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+            <mat-expansion-panel-header>
+                <mat-panel-title> Doctor </mat-panel-title>
+
+            </mat-expansion-panel-header>
+            <div class="info2">
+
+                <h3>Contact Information</h3>
+                <div class="contact-row">
+
+                    <label for="email">Email:</label>
+                    <input type="email" class="column-contact" id="email" email name="email" [value]="doctor.email" readonly disabled>
+
+                </div>
+            </div>
+
+            <div class="info1">
+                <h3>Personal Information</h3>
+                <div class="name-row">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" class="column-name" name="firstName" [value]="doctor.firstName" readonly disabled>
+
+
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" readonly class="column-name" name="lastName"
+                        [value]="doctor.lastName" disabled>
+
+                </div>
+                </div>
+
+                <div class="info2">
+                    <h3>Specialization </h3>
+                    <div class="name-row">
+                        <input type="text" id="doctorSpec" class="doctor-spec" name="doctorSpec" [value]="doctor.specialization" readonly disabled>
+    
+                    </div>
+                    </div>
+
+          
+        </mat-expansion-panel>
+    </mat-accordion>
+
+   
+</div>
+</div>  </div>
+<div class="success-popup" *ngIf="successMessage">
+    {{ successMessage }}
+  </div>
+  

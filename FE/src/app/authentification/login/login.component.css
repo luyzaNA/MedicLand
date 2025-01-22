@@ -1,0 +1,83 @@
+.gradient-custom-2 {
+        background: linear-gradient(to right, #cfd8dc ,#5168ae77,  #8b61c2);
+}
+
+.login{
+    width: 74px;
+    height: 38px;
+    padding: 6px 12px;
+    background: linear-gradient(to right, #8b61c2, #5168ae77, #cfd8dc);
+
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.login:hover{
+    background: linear-gradient(to right, #cfd8dc , #5168ae77, #8b61c2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);  
+
+}
+
+
+.singUp{
+    width: 74px;
+    height: 38px;
+    padding: 6px 12px;
+    background: transparent;
+
+    border: 1px solid black;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.singUp:hover{
+    border: 1px solid black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px); 
+
+}
+   
+    
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+    }
+
+    .eye-icon {
+        position: absolute;
+        top: 30%;
+        right: 10px;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: #606a71;
+      }
+      
+      .sign-in-section, .sign-up-section {
+        opacity: 0;
+        transform: translateX(100%);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      
+      .sign-in-section.active, .sign-up-section.active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      

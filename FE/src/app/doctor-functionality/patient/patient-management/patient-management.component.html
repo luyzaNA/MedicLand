@@ -1,0 +1,43 @@
+<div class="management">
+  <div class="container">
+
+    <div class="btn-nav">
+    <button class="nav" routerLink="../">← Dashboard</button>
+    <button class="nav" routerLink="../Consultations">Consultation → </button>
+  </div>
+  
+
+    <h1 class="page-title">Patients Management</h1>
+
+    <div class="controls">
+      <button class="big-button add-button" (click)="toggleAddPatientForm()" routerLink="./Create">Add Patient</button>
+      <button class="big-button edit-button" (click)="toggleEditPatientForm()" routerLink="./Edit">Edit Patient</button>
+      <button class="big-button delete-button" (click)="toggleDeletePatientForm()" routerLink="./Delete">Delete Patient</button>
+      <button class="big-button view-button" (click)="showAllPatients()" routerLink="./View">View All Patients</button>
+      <button class="big-button view-button" (click)="toggleViewPatient()" routerLink="./Search">Search Patient</button>
+    </div>
+  </div>
+
+  <div *ngIf="isAddPatientFormVisible">
+    <app-add-patient></app-add-patient>
+  </div>
+
+
+  <div *ngIf="isEditPatientFormVisible">
+    <app-edit-patient></app-edit-patient>
+  </div>
+
+  <div *ngIf="isDeletePatientFormVisible">
+    <app-delete-patient></app-delete-patient>
+  </div>
+
+
+  <div *ngIf="isPatientsTableVisible">
+    <app-view-patients></app-view-patients>
+  </div>
+
+  <div *ngIf="isPatientisible">
+    <app-search-patient></app-search-patient>
+  </div>
+</div>
+

@@ -1,0 +1,213 @@
+body {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    margin-top: 120px;
+    font-size: 12px;
+}
+
+.container {
+    margin: 20px auto;
+    padding: 30px;
+    width: 595px; 
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.signature div {
+    width: 50%; 
+    display: inline-block;
+}
+
+
+h1{
+    text-align: center;
+    padding: 30px 20px 0px;
+}
+
+h2 {
+    text-align: center;
+    color: #6a4cbb;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.search {
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-search, .btn-generate-pdf {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+}
+
+.btn-search {
+    background-color: #007bff;
+}
+
+.btn-search:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+
+.section {
+    padding-bottom: 10px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+
+input, textarea {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+.column-contact, .column-adress, .column-name, .column-medicalM {
+    width: 100%;
+}
+.column-sex{
+    width: 50px;
+    height: 40px;
+    text-align: center;
+}
+
+.column-medicalS{
+    width: 50px;
+    height: 40px;
+    text-align: center;
+}
+.adress2-row
+{
+    margin-bottom: 20px;
+}
+.medical2-row, .name-row, .personal-info-row, .adress2-row, .adress1-row, .contact-row, .medical1-row, .diseases-row {
+    display: flex;
+    gap: 10px;
+}
+
+.medical1-row{
+    padding-top: 10px;
+}
+
+
+.column-age {
+    width: 50px;
+    height: 40px;
+    text-align: center;
+}
+
+.column-occupation {
+    width: 90%;
+    height: 40px;
+}
+
+.column-adress2 {
+    width: 40%;
+}
+
+.column-blood {
+    width: 50px;
+    height: 40px;
+    text-align: center;
+}
+
+.column-name {
+    width: 100%;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    width: 595px;        
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #cfd8dc5e;;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    page-break-before: always;
+    page-break-after: always;
+    page-break-inside: avoid;
+}
+.info1, .info2, .info3, .info4, .info5 {
+    page-break-before: always;
+}
+.info2{
+    padding-bottom: 15px;
+}
+.adress2-row{
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.btn-search{
+    background-color:  #694cbbce;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 15px;
+  }
+  button:hover {
+    background-color: #6a4cbb;
+  }
+.search-input{
+    margin: 10px 20px;
+    display: inline;
+}
+
+.search{
+   width: 70%;
+   height: 20px;
+   margin-left: 10px;
+}
+.add-btn {
+    width: 40%;
+    height: 50px;
+    margin: 20px 0px 0px 300px;
+  }

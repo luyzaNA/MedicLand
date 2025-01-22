@@ -1,0 +1,210 @@
+<form (ngSubmit)="onSubmit()" #patientForm="ngForm" method="POST">
+  <h2>Add patient</h2>
+
+  <input type="hidden" name="cnp" required>
+
+  <div class="info1">
+    <h3>Contact Information</h3>
+    <div class="contact-row">
+
+      <label for="email">Email</label>
+      <input type="email" class="column-contact" id="email" email name="email" [(ngModel)]="patient.email" #emailModel="ngModel" placeholder="e.g., john.doe@email.com">
+      <div *ngIf="emailModel.dirty && emailModel.invalid && emailModel.touched" class="error-message">
+        <div *ngIf="emailModel.errors?.['email']">Invalid email format.</div>
+      </div>
+      <label for="phone">Phone*</label>
+      <input type="tel" id="phone" class="column-contact" name="phone" [(ngModel)]="patient.phone" #phoneModel="ngModel" required pattern="^0\d{9}$" placeholder="e.g., 0712345678">
+      <div *ngIf="phoneModel.invalid && phoneModel.touched" class="error-message">
+        <div *ngIf="phoneModel.errors?.['required']">Phone number is required.</div>
+        <div *ngIf="phoneModel.errors?.['pattern']">Invalid phone number format. Format: 0XXXXXXXXX</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="info2">
+    <h3>Personal Information</h3>
+    <div class="name-row">
+      <label for="firstName">First Name* </label>
+      <input type="text" id="firstName" class="column-name" name="firstName" [(ngModel)]="patient.firstName" #firstNameModel="ngModel" required minlength="2" placeholder="e.g., John">
+      <div *ngIf="firstNameModel.invalid && firstNameModel.touched" class="error-message">
+        <div *ngIf="firstNameModel.errors?.['required']">First name is required.</div>
+        <div *ngIf="firstNameModel.errors?.['minlength']">First name must be at least 2 characters long.</div>
+      </div>
+
+      <label for="lastName">Last Name*</label>
+      <input type="text" id="lastName" class="column-name" name="lastName" [(ngModel)]="patient.lastName" #lastNameModel="ngModel" required minlength="2" placeholder="e.g., Doe">
+      <div *ngIf="lastNameModel.invalid && lastNameModel.touched" class="error-message">
+        <div *ngIf="lastNameModel.errors?.['required']">Last name is required.</div>
+        <div *ngIf="lastNameModel.errors?.['minlength']">Last name must be at least 2 characters long.</div>
+      </div>
+    </div>
+
+
+    <label for="cnp">Cnp*</label>
+    <input
+      type="text"
+      id="cnp"
+      [(ngModel)]="patient.cnp"
+      name="cnp"
+      pattern="^\d{13}$"
+      required
+      #cnpModel="ngModel"
+      class="cnp-row"
+      (ngModelChange)="validateAndExtractCNP($event)"
+      placeholder="1234567891234"
+    />
+    <div *ngIf="cnpModel.touched && cnpErrorMessage" class="error-message">
+      {{ cnpErrorMessage }}
+    </div>
+    
+    <div class="personal-info-row">
+      <label for="sex">Gender*:</label>
+      <select id="sex" class="column-sex" name="sex" [value]="patient.sex"  disabled readonly>
+        <option value="M">M</option>
+        <option value="F">F</option>
+      </select>
+      
+      <label for="birthDate">Birth date:</label>
+      <input type="text" id="birthDate" class="column-birthdate" name="birthDate"  [value]="datePipe.transform(patient.birthDate, 'dd.MM.yyyy')" readonly disabled>
+    
+
+      <label for="age">Age*:</label>
+      <input type="text" id="age" name="age" class="column-age" [value]="age"   disabled readonly placeholder="e.g., 30">
+     
+
+      <label for="occupation">Occupation*</label>
+      <input type="text" id="occupation" name="occupation" class="column-occupation" #occupationModel="ngModel" [(ngModel)]="patient.occupation" required placeholder="e.g., Teacher">
+      <div *ngIf="occupationModel.invalid && occupationModel.touched" class="error-message">
+        <div *ngIf="occupationModel.errors?.['required']">Occupation is required.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info3">
+    <h3>Address</h3>
+    <div class="adress1-row">
+      <label for="locality">City*</label>
+      <input type="text" id="locality" class="column-adress" name="locality" #localityModel="ngModel" [(ngModel)]="patient.locality" required placeholder="e.g., New York">
+      <div *ngIf="localityModel.invalid && localityModel.touched" class="error-message">
+        City is required.
+      </div>
+
+      <label for="street">Street*</label>
+      <input type="text" id="street" name="street" class="column-adress" #streetModel="ngModel" [(ngModel)]="street" required placeholder="e.g., 5th Avenue">
+      <div *ngIf="streetModel.invalid && streetModel.touched" class="error-message">
+        Street is required.
+      </div>
+    </div>
+
+    <div class="adress2-row">
+      <label for="number">No*</label>
+      <input type="text" id="number" class="column-adress2" name="number" #numberModel="ngModel" [(ngModel)]="number" required pattern="^\d+$" placeholder="e.g., 25">
+      <div *ngIf="numberModel.invalid && numberModel.touched" class="error-message">
+        <div *ngIf="numberModel.errors?.['required']">Number is required.</div>
+        <div *ngIf="numberModel.dirty && numberModel.errors?.['pattern']">Only digits are allowed.</div>
+      </div>
+
+      <label for="block">Block:</label>
+      <input type="text" id="block" class="column-adress2" #blockModel="ngModel" name="block"  [(ngModel)]="block"  pattern="^[A-Za-z0-9]+$" placeholder="e.g., A1">
+      <div *ngIf="blockModel.dirty  && blockModel.invalid && blockModel.touched" class="error-message">
+        <div *ngIf="blockModel.errors?.['pattern']">Only alphanumeric characters are allowed.</div>
+      </div>
+
+      <label for="staircase">Staircase:</label>
+      <input type="text" id="staircase" class="column-adress2" name="staircase" #staircaseModel="ngModel" [(ngModel)]="staircase" pattern="^\d+$" placeholder="e.g., 2">
+      <div *ngIf="staircaseModel.dirty && staircaseModel.errors?.['pattern']" class="error-message">
+        Only digits are allowed.
+      </div>
+      
+
+
+      <label for="apartment">Ap:</label>
+      <input type="text" class="column-adress2" id="apartment" #apartmanetModel="ngModel" name="apartment" [(ngModel)]="apartment"  min="1" placeholder="e.g., 5">
+      <div *ngIf="apartmanetModel.dirty && apartmanetModel.invalid && apartmanetModel.touched" class="error-message">
+        <div *ngIf="apartmanetModel.errors?.['min']">Apartment number must be at least 1.</div>
+      </div>
+
+
+      <label for="floor">Floor:</label>
+      <input type="text" class="column-adress2" id="floor" #floorModel="ngModel" name="floor" [(ngModel)]="floor"  min="1" placeholder="e.g., 3">
+      <div *ngIf="floorModel.dirty  && floorModel.invalid && floorModel.touched" class="error-message">
+        <div *ngIf="floorModel.errors?.['min']">Floor number must be at least 1.</div>
+      </div>
+      
+
+    </div>
+  </div>
+
+  <div class="info4">
+    <h3>Medical Information</h3>
+    <div class="medical1-row">
+      <label for="bloodGroup">Blood Type*</label>
+      <select id="bloodGroup" name="bloodGroup" class="column-blood" #bloodGroupModel="ngModel" [(ngModel)]="patient.bloodGroup" required>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="O">O</option>
+        <option value="AB">AB</option>
+      </select>
+   
+
+      <label for="rh">Rh Factor*</label>
+      <select id="rh" name="rh" class="column-medicalM" #rhModel="ngModel" [(ngModel)]="patient.rh" required>
+        <option value="NEGATIV">Negative</option>
+        <option value="POZITIV">Positive</option>
+      </select>
+  
+
+      <label for="weight">Weight (kg)*</label>
+      <input type="text" step="0.1" id="weight" class="column-medicalS" #weightModel="ngModel" name="weight" required [(ngModel)]="weight" placeholder="e.g., 70.5">
+      <div *ngIf="weightModel.invalid && weightModel.touched" class="error-message">
+        <div *ngIf="weightModel.errors?.['required']">Weight is required.</div>
+        <div *ngIf="weightModel.errors?.['pattern']">Invalid weight format.</div>
+      </div>
+      
+      <label for="height">Height (cm)*</label>
+      <input type="text" step="0.1" id="height" class="column-medicalS" #heightModel="ngModel" required name="height" [(ngModel)]="height" placeholder="e.g., 175.3">
+      <div *ngIf="heightModel.invalid && heightModel.touched" class="error-message">
+        <div *ngIf="heightModel.errors?.['required']">Height is required.</div>
+        <div *ngIf="heightModel.errors?.['pattern']">Invalid height format.</div>
+      </div>
+      </div>
+
+
+
+      <label for="allergies">Allergies:</label>
+    <textarea id="allergies" name="allergies" class="medical2-row" [(ngModel)]="patient.allergies" placeholder="Enter known allergies"></textarea>
+  </div>
+
+  <div class="info5">
+    <h3>Medical History</h3>
+    <div class="diseases-row">
+      <label for="diseaseName">Disease Name:</label>
+      <input type="text" name="diseases[0][name]" class="diseases-name" #diseaseNameModel="ngModel" [(ngModel)]="disease.name"  placeholder="e.g., Diabetes, Hepatitis">
+      
+
+      <label for="diseaseCategory">Category:</label>
+      <select name="diseases[0][category]" class="diseases-category" #diseaseCategoryModel="ngModel" [(ngModel)]="disease.category" >
+        <option value="Infectious">Infectious</option>
+        <option value="Chronic">Chronic</option>
+        <option value="Genetic">Genetic</option>
+        <option value="Autoimmune">Autoimmune</option>
+        <option value="Other">Other</option>
+      </select>
+    
+    </div>
+
+
+    <label for="diseaseDescription">Disease Description:</label>
+    <textarea name="diseases[0][description]"
+     class="diseases-description" [(ngModel)]="disease.description" placeholder="Details about the disease"></textarea>
+<div>
+  <button type="button" (click)="add_disease()" [disabled]="!disease.name" class="add-disease">Add Disease</button>
+</div>
+</div>
+
+  <button type="submit" class="add-btn" [disabled]="patientForm.invalid">Add Patient</button>
+</form>
+<div class="success-popup" *ngIf="successMessage">
+  {{ successMessage }}
+</div>

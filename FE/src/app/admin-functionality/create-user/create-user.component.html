@@ -1,0 +1,164 @@
+<form (ngSubmit)="saveUser()" #userForm="ngForm" class="add-user-form">
+  <h2>Create User</h2>
+
+  <div class="form-group">
+    <label>Role* </label>
+    <div class="role-radio-buttons">
+      <label>
+        <input type="radio" [(ngModel)]="user.roles" name="role" value="admin" required #role="ngModel" />
+        Admin
+      </label>
+      <label>
+        <input type="radio" [(ngModel)]="user.roles" name="role" value="doctor"  #role="ngModel" required />
+        Doctor
+      </label>
+      <label>
+        <input type="radio" [(ngModel)]="user.roles" name="role" value="director" #role="ngModel"  required />
+        Doctor-Director
+      </label>
+    </div>
+    <div *ngIf="role.invalid && role.touched" class="error-message">Role is required.</div>
+  </div>
+
+  <div class="form-group email-password">
+    <div class="input-group email-field">
+      <label for="email">Email* </label>
+      <input
+        type="email"
+        id="email"
+        [(ngModel)]="user.email"
+        name="email"
+        required
+        email
+        #email="ngModel"
+        placeholder="luyzanica@medicland.com"
+
+      />
+      <div *ngIf="email.invalid && email.touched" class="error-message">
+        <div *ngIf="email.errors?.['required']">Email is required.</div>
+        <div *ngIf="email.errors?.['email']">Invalid email format.</div>
+      </div>
+    </div>
+    <div class="input-group password-field">
+      <label for="password">Password*</label>
+      <div class="password-container">
+        <input
+          [type]="passwordFieldType"
+          id="password"
+          [(ngModel)]="user.password"
+          name="password"
+          required
+          minlength="15"
+          pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=<>?])[A-Za-z\d!@#$%^&*()_\-+=<>?]{15}"
+          #password="ngModel"
+          placeholder="43v=K5?VeSLF8ba"
+        />
+        <button type="button" class="eye-icon" (click)="togglePasswordVisibility()">
+          <mat-icon>{{ passwordFieldType === 'password' ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="password.invalid && password.touched" class="error-message-password">
+        <div *ngIf="password.errors?.['required']">Password is required.</div>
+        <div *ngIf="password.errors?.['minlength']">Password must be at least 15 characters long.</div>
+        <div *ngIf="password.errors?.['pattern']">
+          Password must include a letter, a number, and a special character.
+        </div>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-secondary generate-btn"
+      (click)="generatePassword()"
+    >
+      Generate<mat-icon class="flash_on">flash_on</mat-icon>
+    </button>
+  </div>
+
+  <div *ngIf="user.roles !== 'admin'">
+    <div class="form-group name-group">
+      <div class="input-group first-name">
+        <label for="firstName">First Name*</label>
+        <input
+          type="text"
+          id="firstName"
+          [(ngModel)]="user.firstName"
+          name="firstName"
+          required
+          minlength="2"
+          #firstName="ngModel"
+          placeholder="Nica"
+        />
+        <div *ngIf="firstName.invalid && firstName.touched" class="error-message">
+          <div *ngIf="firstName.errors?.['required']">First name is required.</div>
+          <div *ngIf="firstName.errors?.['minlength']">First name must be at least 2 characters long.</div>
+        </div>
+      </div>
+      <div class="input-group last-name">
+        <label for="lastName">Last Name*</label>
+        <input
+          type="text"
+          id="lastName"
+          [(ngModel)]="user.lastName"
+          name="lastName"
+          required
+          minlength="2"
+          #lastName="ngModel"
+          placeholder="Luyza"
+        />
+        <div *ngIf="lastName.invalid && lastName.touched" class="error-message">
+          <div *ngIf="lastName.errors?.['required']">Last name is required.</div>
+          <div *ngIf="lastName.errors?.['minlength']">Last name must be at least 2 characters long.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group cnp-specialization-group">
+      <div class="input-group cnp-field">
+        <label for="cnp">CNP*</label>
+        <input
+          type="text"
+          id="cnp"
+          [(ngModel)]="user.cnp"
+          name="cnp"
+          pattern="^\d{13}$"
+          required
+          #cnp="ngModel"
+          placeholder="1234567891234"
+        />
+        <div *ngIf="cnp.invalid && cnp.touched" class="error-message">
+          <div *ngIf="cnp.errors?.['required']">CNP is required.</div>
+          <div *ngIf="cnp.errors?.['pattern']">CNP must be 13 digits.</div>
+        </div>
+      </div>
+      <div class="input-group specialization-field">
+        <label for="specialization">Specialization*</label>
+        <select
+          id="specialization"
+          [(ngModel)]="user.specialization"
+          name="specialization"
+          required
+          #specialization="ngModel"
+          class="specialization-select"
+        >
+          <option value="cardiology">Cardiology</option>
+          <option value="neurology">Neurology</option>
+          <option value="pediatrics">Pediatrics</option>
+          <option value="orthopedics">Orthopedics</option>
+        </select>
+        <div
+          *ngIf="specialization.invalid && specialization.touched"
+          class="error-message"
+        >
+          Specialization is required.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="userForm.invalid" class="save-btn">
+    Save User
+  </button>
+</form>
+<div *ngIf="successMessage" class="success-popup">
+  {{ successMessage }}
+</div>

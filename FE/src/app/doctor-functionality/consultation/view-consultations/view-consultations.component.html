@@ -1,0 +1,76 @@
+<body>
+    <h2>List of Consultations</h2>
+
+    <div class="filters">
+      <label>
+          Consultation ID:
+          <input type="text" [(ngModel)]="filterConsultationId" (input)="applyFilters()" placeholder="Search by" class="id" />
+          <span (click)="clearFilter('filterConsultationId')" class="id_icon">X</span>
+      </label>
+      
+    
+      <label>
+          Specialization:
+          <input type="text" [(ngModel)]="filterSpecialization" (input)="applyFilters()" placeholder="Search by" />
+          <span (click)="clearFilter('filterSpecialization')" class="clear-icon">X</span>
+      </label>
+      
+      <label>
+          Patient Name:
+          <input type="text" [(ngModel)]="filterPatientName" (input)="applyFilters()" placeholder="Search by" />
+          <span (click)="clearFilter('filterPatientName')" class="clear-icon">X</span>
+      </label>
+      
+      <label>
+          Diagnosis:
+          <input type="text" [(ngModel)]="filterDiagnostic" (input)="applyFilters()" placeholder="Search by" />
+          <span (click)="clearFilter('filterDiagnostic')" class="clear-icon">X</span>
+      </label>
+      
+      <label>
+          Medication:
+          <input type="text" [(ngModel)]="filterMedication" (input)="applyFilters()" placeholder="Search by" />
+          <span (click)="clearFilter('filterMedication')" class="clear-icon">X</span>
+      </label>
+      
+      <label>
+          Date:
+          <input type="date" [(ngModel)]="filterDate" (change)="applyFilters()" />
+      </label>
+      
+  
+      <button (click)="clearFilters()" class="clear-button ">Clear Filters</button>
+    </div>
+  
+    <div *ngIf="consultationDetail.length === 0" class="no-entries">
+      <p>No entries found</p>
+    </div>
+  
+    <table *ngIf="consultationDetail.length > 0" class="consultation-table">
+      <thead>
+        <tr>
+            <th style="width: 100px;">Consultation ID</th>
+          <th>Specialization</th>
+          <th>Patient</th>
+          <th>Patient CNP</th>
+          <th>Symptoms</th>
+          <th>Diagnosis</th>
+          <th>Medication</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let consultation of consultationDetail">
+          <td>{{ consultation.id }}</td>
+          <td>{{ consultation.specialization }}</td>
+          <td>{{ consultation.patientName }}</td>
+          <td>{{ consultation.patientCnp }}</td>
+          <td>{{ consultation.symptoms }}</td>
+          <td>{{ consultation.diagnostic }}</td>
+          <td>{{ consultation.medication || 'NA'}}</td>
+          <td>{{ consultation.date | date:'dd/MM/yyyy' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+  

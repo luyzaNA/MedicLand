@@ -1,0 +1,38 @@
+<div class="container">
+    <h2>Specializations and Doctors</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Specialization</th>
+          <th>Doctors</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let specialization of specializations">
+          <tr *ngIf="specialization.doctors.length > 0">
+            <td [attr.rowspan]="specialization.doctors.length" class="specialization-name">{{ specialization.name }}</td>
+            <td class="doctor-row">
+              <span class="doctor-name">{{ specialization.doctors[0]?.firstName }} {{ specialization.doctors[0]?.lastName }}</span>
+              <div class="doctor-email-box">
+                <a class="doctor-email" [href]="'mailto:' + specialization.doctors[0]?.email">
+                  <mat-icon class="email-icon">email</mat-icon>
+                </a>
+              </div>
+            </td>
+          </tr>
+  
+          <tr *ngFor="let doctor of specialization.doctors.slice(1)">
+            <td class="doctor-row">
+              <span class="doctor-name">{{ doctor.firstName }} {{ doctor.lastName }}</span>
+              <div class="doctor-email-box">
+                <a class="doctor-email" [href]="'mailto:' + doctor.email">
+                  <mat-icon class="email-icon">email</mat-icon>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  

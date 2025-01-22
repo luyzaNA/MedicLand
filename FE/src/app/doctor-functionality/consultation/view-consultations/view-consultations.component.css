@@ -1,0 +1,121 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 1.5rem;
+    
+
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+  }
+  
+  input {
+    padding: 5px;
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  .clear-icon {
+    cursor: pointer;
+    color: red;
+    font-size: 14px;
+    margin-left: 5px;
+  }
+  .clear-button {
+    flex-shrink: 0; 
+    background-color: #ff4747;
+    padding: 4px 4px;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 150px;
+    height: 40px;
+    margin-top: 30px;
+    margin-left: 12px;
+  }
+  .clear-button:hover {
+    background-color: #e12f2f;
+  }
+  
+    .consultation-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .consultation-table th, .consultation-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .consultation-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .no-entries p {
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+  }
+
+
+  .clear-icon {
+    cursor: pointer;
+    color: red;
+    position: absolute;
+    font-weight: bold;
+    margin-left: 140px;
+    margin-top: 40px;
+  }
+
+.id{
+    width: 120px;
+}
+.id_icon{
+    cursor: pointer;
+    color: red;
+    position: absolute;
+    font-weight: bold;
+    margin-left: 100px;
+    margin-top: 40px;
+}.consultation-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
+  }
+  
+  .consultation-table th, .consultation-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .consultation-table th {
+    background-color: #f4f4f4;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #6a4cbb;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }

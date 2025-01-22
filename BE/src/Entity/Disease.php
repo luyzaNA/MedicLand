@@ -17,6 +17,9 @@ class Disease
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(enumType: DiseaseCategory::class, nullable: false)]
+    private DiseaseCategory $category;
+
     public function getName(): ?string
     {
         return $this->name;
@@ -28,6 +31,7 @@ class Disease
         return $this;
     }
 
+
     public function getDescription(): ?string
     {
         return $this->description;
@@ -38,4 +42,25 @@ class Disease
         $this->description = $description;
         return $this;
     }
+
+    public function getCategory(): DiseaseCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(DiseaseCategory $category): static
+    {
+        $this->category = $category; 
+        return $this;
+    }
 }
+enum DiseaseCategory: string
+{
+    case INFECTIOUS = 'Infectious';
+    case CHRONIC = 'Chronic';
+    case GENETIC = 'Genetic';
+    case AUTOIMMUNE = 'Autoimmune';
+    case OTHER = 'Other';
+}
+
+

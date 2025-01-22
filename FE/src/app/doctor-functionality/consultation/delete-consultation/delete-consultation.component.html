@@ -1,0 +1,26 @@
+<div class="container">
+    <form (ngSubmit)="onSearch()" #searchForm="ngForm" method="GET" >
+        <h2>Search Consultation</h2>
+
+
+        <label for="cnp">NR:</label>
+        <input type="text" id="nr" name="nr" [(ngModel)]="nr" class="search" required
+            placeholder="e.g., 124">
+
+<button type="submit" [disabled]="searchForm.invalid" class=" btn-search">Search</button>
+
+
+        <div *ngIf="patient.firstName" class="patient-card">
+            <h3>Consultation Details</h3>
+            <p><strong>Nr:</strong> {{id }}</p>
+            <p><strong>Patient :</strong> {{ name}}</p>
+            <p><strong>Doctor:</strong> {{ doctor_name }}</p>
+            <p><strong>Date:</strong> {{ consultation.date  | date:'mediumDate'}}</p>
+
+            <button (click)="confirmDelete()" class="btn-delete"><mat-icon>delete</mat-icon>Delete Consultation</button>
+          </div>
+    </form>
+    <div class="success-popup" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+      

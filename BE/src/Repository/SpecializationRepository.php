@@ -31,4 +31,9 @@ class SpecializationRepository extends ServiceEntityRepository
     {
         return $this->find($name);
     }
+    public function findAllSpecializations(): array
+    {
+        return $this->findAll();
+    }   
+
 }

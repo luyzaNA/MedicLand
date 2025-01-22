@@ -4,7 +4,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-
+use Doctrine\Common\Collections\ArrayCollection;
 #[ORM\Entity]
 #[ORM\Table(name: "users", uniqueConstraints: [
     new ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USER_EMAIL', columns: ['email']),
@@ -19,22 +19,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: false)]
     private string $password;
 
-    #[ORM\Column(length: 50, nullable: false)]
-    private string $role;
+    #[ORM\Column(type: "simple_array", nullable: true)]
+    private array $roles = [];
 
-    #[ORM\Column(length: 50, nullable: true)] 
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $cnp = null;
 
-    #[ORM\Column(length: 50, nullable: true)] 
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $firstName = null;
 
-    #[ORM\Column(length: 50, nullable: true)] 
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $lastName = null;
 
     #[ORM\ManyToOne(targetEntity: Specialization::class)]
-    #[ORM\JoinColumn(name: "specialization_name", referencedColumnName: "name", nullable: true)] 
+    #[ORM\JoinColumn(name: "specialization_name", referencedColumnName: "name", nullable: true)]
     private ?Specialization $specialization = null;
 
+
+    #[ORM\OneToOne(targetEntity: Patient::class)]
+    #[ORM\JoinColumn(name: "patient_email", referencedColumnName: "email", nullable: true)]
+    private ?Patient $patient = null;
+
+public function __construct() {
+    $this->roles = [];
+}
+    public function getPatient(): ?User
+    {
+        return $this->patient;
+    }
+
+    public function setPatient(?Patient $patient): static
+    {
+        $this->patient = $patient;
+        return $this;
+    }
     public function getEmail(): ?string
     {
         return $this->email;
@@ -57,14 +75,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRole(): ?string
+    public function getRoles(): array
     {
-        return $this->role;
+        return $this->roles;
     }
 
-    public function setRole(string $role): static
+    public function setRoles(array $roles): static
     {
-        $this->role = $role;
+        $this->roles = $roles;
         return $this;
     }
 
@@ -121,8 +139,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
     }
 
-    public function getRoles(): array
-    {
-        return [$this->role]; 
-    }
+
 }

@@ -1,0 +1,18 @@
+<div class="search-container">
+  <h2>Delete User</h2>
+  <input
+    [(ngModel)]="searchEmail"
+    (input)="searchByEmail()"
+    placeholder="Search by email"
+    class="search-input" />
+
+  <ul *ngIf="showUsers" class="user-list">
+    <li *ngFor="let user of users" class="user-item">
+      <span class="user-email">{{ user.email }}</span>
+      <button (click)="confirmDelete(user.email)" class="delete-button">Delete</button>
+    </li>
+  </ul>
+</div>
+<div class="success-popup" *ngIf="successMessage">
+  {{ successMessage }}
+</div>

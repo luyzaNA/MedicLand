@@ -1,1 +1,90 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.management{
+  padding-top: 50px;
+  padding-bottom: 50px;
+  max-width: 1200px;
+  margin: 100px auto;
+  background-color: white;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+ }
+
+
+.big-button {
+    background-color: #8b61c2;
+    color: white;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .big-button:hover {
+    background-color: #6a47a1;
+    transform: translateY(-2px);
+  }
+  
+  .big-button:focus {
+    outline: none;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .page-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #4e2a84;
+    margin-bottom: 40px;
+    font-weight: bold;
+  }
+  .success-popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #45702cc1;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    animation: fadeInOut 3s ease forwards;
+    z-index: 1000;
+  }
+
+
+input::placeholder, textarea::placeholder{
+  color: #3e3b446a;
+}
+
+.btn-nav{
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 10px;
+}
+
+.nav{
+  padding: 8px;
+  background-color: transparent;
+  border: none;
+  font-size: large;
+  border: 1px solid white;
+  color: #4e2a84;
+}
+
+.nav:hover{
+  border: 1px solid #4e2a8444
+}

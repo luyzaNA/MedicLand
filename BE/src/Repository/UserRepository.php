@@ -38,4 +38,32 @@ class UserRepository extends ServiceEntityRepository
     {
         return $this->findOneBy(['email' => $email]);
     }
+
+    public function findDoctorNamesBySpecialization(string $specializationName): array
+{
+    $qb = $this->createQueryBuilder('u')
+        ->select('u.firstName, u.lastName, u.email') 
+        ->join('u.specialization', 's')
+        ->where('s.name = :specializationName')
+        ->setParameter('specializationName', $specializationName);
+
+    return $qb->getQuery()->getArrayResult();
+}
+    public function findAllUsers(): array
+    {
+        return $this->findAll();
+    } 
+
+ 
+public function findByDoctor(): array
+{
+    return $this->createQueryBuilder('u')
+        ->select('u')
+        ->where('u.roles LIKE :role')
+        ->setParameter('role', '%doctor%')
+        ->getQuery()
+        ->getResult();
+}
+
+
 }

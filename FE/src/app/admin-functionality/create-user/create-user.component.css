@@ -1,0 +1,259 @@
+.add-user-form {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+  background-color: #fff; 
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+
+  h2 {
+    text-align: center;
+    color: #6a4cbb;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    color: #333;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: all 0.3s ease;  background-color: #f4f4f4;
+
+
+  }
+
+  input:focus,
+  select:focus {
+    border-color: #6a4cbb;
+  }
+
+  .email-password {
+    display: flex;
+    gap: 20px;
+  }
+
+  .email-field {
+    max-width: 410px;
+  }
+
+  .email-field,
+  .password-field {
+    flex: 1;
+  }
+
+  .password-field {
+    display: flex;
+    flex-direction: column;
+    max-width: 309px;
+  }
+
+  .password-container {
+    width: 100%;
+    position: relative;
+  }
+
+  .password-container input {
+    width: 100%;
+  }
+
+  .password-container .eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .generate-btn {
+    background-color: #6a4cbb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 28px;
+    border-radius: 1px;
+    height: 50px; 
+    width: 82px;
+  }
+
+  .generate-btn:hover {
+    background-color: #5a3da6;
+  }
+
+  .save-btn {
+    width: 100%;
+    height: 50px;
+    padding: 14px;
+    background-color: #6a4cbb;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .save-btn:disabled {
+    background-color: #bbb;
+    cursor: default;
+  }
+
+  .save-btn:hover:not(:disabled) {
+    background-color: #5a3da6;
+  }
+
+  .success-popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #45702c;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    animation: fadeInOut 3s ease forwards;
+    z-index: 1000;
+  }
+
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      top: 0;
+    }
+    25% {
+      opacity: 1;
+      top: 20px;
+    }
+    75% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      top: 0;
+    }
+  }
+
+  .role-radio-buttons {
+    display: flex;
+    justify-content: flex-start; 
+    gap: 20px; 
+    padding: 10px 0;
+  }
+
+  .role-radio-buttons label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+  }
+
+  .role-radio-buttons input[type="radio"] {
+    margin-right: 8px;
+  }
+
+  .specialization-select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+  }
+
+  .name-group {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  .first-name,
+  .last-name {
+    flex: 1;
+  }
+
+  .cnp-specialization-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .cnp-field,
+  .specialization-field {
+    flex: 1;
+  }
+
+  input {
+    border-radius: 0px;
+  }
+
+  select{
+    width: 410px;
+    height: 50px;
+  }
+
+
+  .eye-icon {
+    position: absolute;
+    top: 30%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #606a71;
+    padding-bottom: 17px;
+  }
+
+  .flash_on{
+    padding: 0%;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 0.875rem;
+    position: absolute;
+    bottom: -12px;
+    padding-bottom: 5px;
+    left: 0;
+  }
+
+  .error-message-password{
+      color: red;
+      font-size: 0.875rem;
+      margin-top: 4px; 
+      position: relative; 
+
+  }

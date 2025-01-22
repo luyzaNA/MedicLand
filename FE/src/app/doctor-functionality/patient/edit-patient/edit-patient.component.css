@@ -1,0 +1,343 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  form {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #34495e;
+  }
+  
+  input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    border-color: #2980b9;
+    outline: none;
+    box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+  }
+  
+  
+
+  .btn-search{
+    background-color:  #694cbbce;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 80px;
+  }
+  button:hover {
+    background-color: #6a4cbb;
+  }
+  
+  .error-message {
+    color: #e74c3c;
+    font-size: 12px;
+  }
+  
+.allergy-container {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.allergy-list {
+    color: #fb1d1d;  
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: bold;
+}
+
+  .column-contact ,  .column-name {
+    width: 100%;
+  }
+  
+  textarea {
+    resize: vertical;
+  }
+  
+  .add-btn {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  ul li {
+    background-color: #f3f3f3;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 15px;
+  }
+  
+body, h1, h2, form, input, textarea, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+h2 {
+    text-align: center;
+    color: #6a4cbb;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+h3 {
+    margin-bottom: 1rem;
+    color: #6a4cbb;
+    font-weight: bolder;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: inline; 
+    width: 150px; 
+    text-align: center; 
+    padding-right: 10px; 
+}
+
+
+form {
+    max-width: 850px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    margin-left: 0px;
+}
+
+input, select, textarea {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+textarea{
+    margin-top: 5px;
+}
+
+.column-contact{
+   width: 100%;
+}
+
+.column-adress{
+    width: 100%;
+    margin-bottom: 20px;
+ }
+ .cnp-row{
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;     
+} 
+
+.info1{
+    background-color: #af95d11e;
+    padding: 20px;
+    
+}
+
+.info2{
+    background-color: #b7b7c344;
+    padding: 20px;
+
+}
+
+.info3{
+    background-color: #af95d11e;
+    padding: 20px;
+}
+
+
+.info4{
+    background-color: #b7b7c344;
+    padding: 20px;
+}
+.info5{
+    background-color: #af95d11e;
+    padding: 20px;
+}
+
+
+
+
+
+.name-row, .personal-info-row, .adress2-row, .adress1-row, .contact-row, .medical1-row, .diseases-row{    
+    display: flex;
+    gap: 10px;
+}
+
+.column-name{
+    width: 100%;
+    margin-bottom: 20px;
+ }
+ 
+
+
+ .column-sex{
+    width: 50px;
+    padding: 6px;
+ }
+
+ .column-birthdate{
+    width:120px;
+ }
+
+ .column-age{
+    width:80px;
+ }
+
+ .column-occupation{
+    width: 90%;
+ }
+
+.column-adress2{
+    width: 40%;
+
+}
+
+.column-medicalS{
+    width: 33%;
+    margin-bottom: 20px;     
+}
+
+.column-medicalM{
+    width: 49%;
+    margin-bottom: 20px;     
+
+}
+
+.column-blood{
+    width: 15%;
+    margin-bottom: 20px;     
+
+}
+.medical2-row{
+    display: flex;
+    width: 100%;
+}
+
+.diseases-name{
+    width: 70%;
+    margin-bottom: 20px;     
+
+}
+
+.diseases-category{
+    width: 30%;
+    margin-bottom: 20px;     
+
+}
+
+
+.diseases-description{
+    width: 100%;
+}
+
+.add-btn {
+    width: 100%;
+    height: 50px;
+    padding: 14px;
+    background-color: #6a4cbb;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .add-btn:disabled {
+    background-color: #bbb;
+    cursor: default;
+  }
+
+  .add-btn:hover:not(:disabled) {
+    background-color: #5a3da6;
+  }
+  .error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 5px;
+    display: block; 
+}
+
+.add-disease{
+    width: 100px;
+    padding: 14px;
+    background-color: white;
+    color: #6a4cbb;;
+    font-size: 12px;
+    border: 1px solid #6a4cbb ;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 600px;
+    margin-top: 10px;
+    border-radius: 2px;
+}
+
+
+
+.add-disease:disabled {
+    background-color: #acabae67;
+    cursor: default;
+    color: black;
+    border: 1px solid black;
+  }
+
+  .add-disease:hover:not(:disabled) {
+    background-color: #5a3da6;
+    color: white;
+
+}
+
+
+ .search{
+    width: 70%;
+}

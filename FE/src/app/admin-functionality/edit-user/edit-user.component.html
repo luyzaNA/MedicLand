@@ -1,0 +1,68 @@
+<div class="search-container">
+    <h2>Search Doctor</h2>
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (input)="filterUsers()"
+      class="search-bar"
+      placeholder="Search by Email"
+    />
+
+    <div *ngIf="filteredUsers.length > 0" class="search-results-title">
+      <p>Results for: "{{ searchQuery }}"</p>
+    </div>
+
+    <div *ngIf="filteredUsers.length > 0" class="user-list-container">
+      <ul class="user-list">
+        <li *ngFor="let user of filteredUsers" (click)="selectUser(user)">
+          {{ user.email }}
+        </li>
+      </ul>
+    </div>
+
+    <p *ngIf="showNoUsersMessage" class="no-results-message">No users found</p>
+  </div>
+
+  <div *ngIf="selectedUser" class="edit-user-form">
+    <h2>Edit Doctor</h2>
+    <div class="form-container">
+      <h3 class="form-title">Editing User: {{ selectedUser.email }}</h3>
+      <p><strong>Role:</strong> Doctor</p>
+
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input
+          type="text"
+          id="firstName"
+          [(ngModel)]="selectedUser.firstName"
+          pattern="[A-Za-z]+"
+          required
+          #nameInput="ngModel"
+          class="edit"
+          />
+        <div *ngIf="nameInput.invalid && nameInput.touched" class="error-message">
+          <div *ngIf="nameInput.errors?.['required']">Name is required.</div>
+          <div *ngIf="nameInput.errors?.['pattern']">Only letters are allowed.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Is Director?</label>
+        <div class="radio-group">
+          <label>
+            <input type="radio" [(ngModel)]="isDirector" [value]="true" />
+            Yes
+          </label>
+          <label>
+            <input type="radio" [(ngModel)]="isDirector" [value]="false" />
+            No
+          </label>
+        </div>
+      </div>
+      <div class="success-popup" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+
+      <button (click)="saveUser()" class="save-btn" [disabled]="nameInput.invalid">Save</button>
+    </div>
+  </div>

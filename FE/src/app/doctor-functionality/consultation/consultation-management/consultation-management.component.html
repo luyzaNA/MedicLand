@@ -1,0 +1,36 @@
+<div class="management">
+    <div class="container">
+        <div class="btn-nav">
+            <button class="nav" routerLink="../">← Dashboard</button>
+            <button class="nav" routerLink="../Reports"> Reports → </button>
+        </div>
+        <h1 class="page-title">Consultation Management</h1>
+
+       
+        <div class="controls">
+            <button class="big-button add-button" (click)="toggleAddConsultationForm()" routerLink="./Add">Add
+                Consultation</button>
+            <button class="big-button edit-button" (click)="toggleEditConsultationForm()" routerLink="./Edit">Edit
+                Consultation</button>
+            <button class="big-button delete-button" (click)="toggleDeleteConsultationForm()"
+                routerLink="./Delete">Delete Consultation</button>
+            <button class="big-button view-button" (click)="toggleViewConsultation()" routerLink="./View">View All
+                Consultation</button>
+        </div>
+    </div>
+
+    <div *ngIf="isAddConsultationFormVisible">
+        <app-add-consultation></app-add-consultation>
+    </div>
+
+    <div *ngIf="isEditConsultationFormVisible">
+        <app-edit-consultation></app-edit-consultation>
+    </div>
+
+    <div *ngIf="isDeleteConsultationFormVisible">
+        <app-delete-consultation></app-delete-consultation>
+    </div>
+
+    <div *ngIf="isConsultationsTableVisible">
+        <app-view-consultations></app-view-consultations>
+    </div>

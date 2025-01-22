@@ -1,0 +1,62 @@
+<div class="specialization-management">
+  <div class="container">
+    <h1 class="page-title">Specialization Management</h1>
+
+    <div class="success-popup" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+
+    <div class="controls">
+      <button class="big-button add-button" (click)="toggleAddForm()">Add Specialization</button>
+      <button class="big-button view-button" (click)="showTable()">View All</button>
+    </div>
+
+    <div class="add-form" *ngIf="isAddFormVisible">
+      <div class="input-container">
+        <input
+          type="text"
+          [(ngModel)]="newSpecializationName"
+          class="specialization-input"
+          placeholder="Enter specialization name"
+          required
+          minlength="3"
+          #nameInput="ngModel"
+        />
+        
+        <div *ngIf="nameInput.invalid && nameInput.touched" class="error-message">
+          <div *ngIf="nameInput.errors?.['required']">Name is required.</div>
+          <div *ngIf="nameInput.errors?.['minlength']">Name must be at least 3 characters long.</div>
+        </div>
+      </div>
+
+      <button class="save-button" (click)="saveSpecialization()" [disabled]="nameInput.invalid || nameInput.pristine">Save</button>
+    </div>
+
+    <div class="search-container" *ngIf="isTableVisible">
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        (input)="searchSpecializations()"
+        class="search-bar"
+        placeholder="Search Specializations..."
+      />
+    </div>
+
+    <div class="table-container" *ngIf="isTableVisible">
+      <div class="table-wrapper">
+        <table class="specializations-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let specialization of filteredSpecializations">
+              <td>{{ specialization.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+<body>
+    <form (ngSubmit)="onSearch()" #searchForm="ngForm" method="GET">
+        <h2>Search consultation</h2>
+
+        <div class="search-input">
+            <span class="title">ID:</span>
+            <input type="text" id="cnp" name="cnp" [(ngModel)]="nr" class="search" required placeholder="e.g., 1234567890123">
+            <button type="submit" [disabled]="searchForm.invalid" class="btn-search">Search</button>
+        </div>
+    </form>
+
+    <div class="container" id="content">
+        <h1>Consultation report </h1>
+        <h3>{{consultation.doctorSpecializationName + ' - ' + datePipe.transform(consultation.date, 'dd.MM.yyyy')}} </h3>
+
+        <div class="info-category" id="consultation-details">
+            <div class="section">Consultation Details:</div>
+            <div class="consultation-row">
+                 <div class="title">Medication:</div>
+                <input type="text" id="medication" [value]="consultation.medication ? consultation.medication : '-'" name="medication" class="cnp-row" disabled readonly/>
+                <div class="title">Symptoms:</div>
+                <input type="text" id="symptoms" [value]="consultation.symptoms" name="symptoms" class="cnp-row" disabled readonly/>
+                <div class="title">Diagnosis:</div>
+                <input id="diseases" name="diseases" class="medical2-row" [value]="getDiagnosticList()" disabled readonly>
+            </div>
+        </div>
+        <div class="info-category" id="personal-info">
+            <div class="section">Personal Info:</div>
+            <div class="name-email-row">
+                <div class="title">Name:</div>
+                <input type="text" id="firstName" class="column-name" name="firstName" [value]="consultation.patientFirstName + ' ' + consultation.patientLastName" disabled readonly>
+                <div class="title">Email:</div>
+                <input type="email" class="column-contact" id="email" name="email" [value]="consultation.patientEmail ? consultation.patientEmail : '-'" disabled readonly>
+            </div>
+            <div class="cnp-phone-row">
+                <div class="title">CNP:</div>
+                <input type="text" id="cnp" [value]="consultation.patientCnp" name="cnp" class="cnp-row" disabled readonly/>
+                <div class="title">Phone:</div>
+                <input type="tel" id="phone" class="column-contact" name="phone" [value]="consultation.patientPhone" disabled readonly>
+            </div>
+            <div class="occupation-age-row">
+                <div class="title">Occupation:</div>
+                <input type="text" id="occupation" [value]="consultation.patientOccupation" name="occupation" class="cnp-row" disabled readonly/>
+                <div class="title">Age:</div>
+                <input type="text" id="age" [value]="consultation.patientAge" name="age" class="cnp-row" disabled readonly/>
+            </div>
+            <div class="address-row">
+                <div class="title">Address:</div>
+                <input type="text" id="address" [value]="consultation.patientAddress" name="address" class="cnp-row" disabled readonly/>
+            </div>
+        </div>
+
+        <div class="info-category" id="medical-info">
+            <div class="section">Medical Info:</div>
+            <div class="medical-info-row">
+                <div class="title">BG:</div>
+                <input type="text" class="column-blood" id="bloodGroup" name="bloodGroup" [value]="consultation.patientBloodGroup" disabled readonly>
+                <div class="title">RH:</div>
+                <input type="text" class="column-medicalS" id="rh" name="rh" [value]="consultation.patientRh" disabled readonly>
+                <div class="title">Weight (kg):</div>
+                <input type="text" step="0.1" id="weight" class="column-medicalS" name="weight" [value]="consultation.patientWeight" disabled readonly>
+                <div class="title">Height (cm):</div>
+                <input type="text" step="0.1" id="height" class="column-medicalS" name="height" [value]="consultation.patientHeight" disabled readonly>
+            </div>
+            <div class="title">Allergies:</div>
+            <input id="allergies" name="allergies" class="medical2-row" [value]="consultation.patientAllergies ? consultation.patientAllergies : '-'" disabled readonly>
+        </div>
+
+        <div class="info-category" id="medical-diseases-history">
+            <div class="section">Medical Diseases History:</div>
+            <input id="diseases" name="diseases" class="medical2-row" [value]="getDiseasesList()" disabled readonly>
+        </div>
+
+       
+        
+
+        <div class="signature">
+            <div style="border-bottom: 1px solid black; text-align: center; padding: 10px; width: 100px; margin-right: 300px">Doctor's Signature</div>
+            <div style="border-bottom: 1px solid black; text-align: center; padding: 10px; width: 100px">Patient's Signature</div>
+        </div>
+
+        <div class="footer">
+            <div style="text-align: center; padding: 10px;">
+                Generated on {{ (datePipe.transform(currentDate, 'dd.MM.yyyy'))! }}
+            </div>
+        </div>
+
+    </div>
+    <button *ngIf="consultation.patientCnp" (click)="generatePDF()" class="btn-generate-pdf">Generate PDF</button>
+
+</body>

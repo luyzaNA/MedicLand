@@ -3,7 +3,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity]
@@ -24,11 +24,6 @@ class Consultation
     private ?User $doctor = null;
 
     #[ORM\Column(type: "datetime")]
-    #[Assert\Date]
-    #[Assert\EqualTo(
-        value: "today",
-        message: "The birth date must be exactly today."
-    )]
     private \DateTimeInterface $date;
 
     #[ORM\ManyToMany(targetEntity: Disease::class)]
@@ -39,8 +34,12 @@ class Consultation
     )]
     private Collection $diagnostic;
 
-    #[ORM\Column(type: "simple_array", nullable: true)]
-    private array $medication = [];
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+   private ?string $medication = null;
+
+   #[ORM\Column(type: Types::TEXT, nullable: true)]
+   private ?string $symptoms = null; 
+
 
     public function __construct()
     {
@@ -104,14 +103,25 @@ class Consultation
         return $this;
     }
 
-    public function getMedication(): array
+    public function getMedication(): ?string
     {
         return $this->medication;
     }
 
-    public function setMedication(array $medication): static
+    public function setMedication(?string $medication): static
     {
         $this->medication = $medication;
+        return $this;
+    }
+
+    public function getSymptoms(): ?string
+    {
+        return $this->symptoms;
+    }
+
+    public function setSymptoms(?string $symptoms): static
+    {
+        $this->symptoms = $symptoms;
         return $this;
     }
 }

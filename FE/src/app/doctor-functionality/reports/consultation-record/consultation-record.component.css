@@ -1,0 +1,189 @@
+body {
+    background-color: #f9f9f9;
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    margin-top: 80px;
+  }
+  
+  .search {
+    margin: 20px auto;
+    padding: 15px;
+    width: 80%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+  }
+  
+  input, textarea {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .btn-search, .btn-generate-pdf {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    transition: background-color 0.3s;
+    border-radius: 8px;
+  }
+
+  .btn-generate-pdf{
+    margin-left: 500px;
+  }
+  
+  .btn-search,.btn-generate-pdf {
+    background-color: #694cbbce;
+  }
+  
+  .btn-search:hover {
+    background-color: #6a4cbb;
+  }
+  
+  .add-btn {
+    width: 40%;
+    height: 50px;
+    margin: 20px 0px 0px 300px;
+  }
+  h2 {
+    text-align: center;
+    color: #6a4cbb;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    text-align: center;
+    color: #6a4cbb;
+    font-size: 20px;
+    margin-bottom: 20px;
+    }  
+  
+  form {
+    margin-bottom: 20px;
+  }
+  
+  .details-table, .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .signature {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .signature-box {
+    width: 45%;
+    text-align: center;
+  }
+  
+  .footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #555;
+  }
+  
+  .info-category {
+    margin-bottom: 20px;
+  }
+  
+  .section {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .title {
+    flex: 1;
+  }
+
+  .title{
+    margin-left: 10px;
+  }
+  
+  input {
+    flex: 2;
+  }
+
+#symptoms-info textarea {
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 10px;
+  }
+  
+  #diagnostic-info input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  #medication-info textarea {
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 10px;
+  }
+.doctor-info {
+    display: flex;
+  }
+  
+ 
+  
+  .doctor-info .doctor-email {
+    width: 100%;
+  }
+.name-email-row, .cnp-phone-row, .occupation-age-row, .medical-info-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.name-email-row div, .cnp-phone-row div, .occupation-age-row div, .medical-info-row div {
+    display: flex;
+    align-items: center;
+    width: 48%;
+}
+
+.title {
+    margin-right: 10px;
+}
+
+.container {
+    padding: 20px;
+}
+
+.signature, .footer {
+    margin-top: 20px;
+}
+
+input{
+    text-align: center;
+}
+h1{
+    text-align: center;
+    padding: 20px 20px 0px;
+}
+
+h2 {
+    text-align: center;
+    color: #6a4cbb;
+    font-size: 24px;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,126 @@
+.container {
+    max-width: 100%vw;
+    padding: 50px;
+    background-color: #f7f7f7; 
+    background-image: url('../../assets/table_background.jpg'); 
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat;
+    border-radius: 8px;
+}
+
+body {
+    background-color: #f4f4f9;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    width: 100%;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    overflow: hidden;
+    border:#333;
+}
+
+th {
+    background-color: #8b61c2;
+    color: white;
+    padding: 12px 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    border-right: 1px solid #dcdcdc;
+    border-bottom: 2px solid #7a4ab6;
+}
+
+td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid #dcdcdc;
+}
+
+.specialization-row {
+    background-color: #e6e1f5;
+    border-top: 2px solid #8b61c2;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+}
+
+.specialization-name {
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    text-transform: uppercase;
+
+}
+
+.doctor-row {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.doctor-row:hover {
+    background-color: #a491be3b;
+    cursor: pointer;
+}
+
+.doctor-name {
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    color: #333;
+}
+
+.doctor-email-box {
+    display: inline-flex;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.doctor-row:hover .doctor-email-box {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.email-icon {
+    font-size: 24px;
+    color: #8b61c2;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.doctor-email-box:hover .email-icon {
+    color: #7a4ab6;
+    transform: scale(1.2);
+}
+
+.doctor-row:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+}
+
+.container h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}

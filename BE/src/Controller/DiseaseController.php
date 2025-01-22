@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Services\DiseaseService;
+use App\Entity\User;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
@@ -13,7 +15,8 @@ class DiseaseController extends AbstractController
 {
 
     public function __construct(private DiseaseService $diseaseService, 
-                                private ValidatorInterface $validator
+                                private ValidatorInterface $validator,
+                                private Security $security,
     ){}
 
     #[Route('/api/disease', name: 'add_diseasec', methods: ['POST'])]
@@ -23,7 +26,9 @@ class DiseaseController extends AbstractController
 
         $constraints = new Assert\Collection([
             'name' => [new Assert\NotBlank(), new Assert\Length(['min' => 3])],
-            'description' => [new Assert\Optional([new Assert\Length(['min' => 5])])] 
+            'description' => [new Assert\Optional([new Assert\Length(['min' => 5])])],
+            'category' => [new Assert\NotBlank()]
+
         ]);
         $violations = $this->validator->validate($data, $constraints);
 
@@ -38,9 +43,11 @@ class DiseaseController extends AbstractController
 
         $name = $data['name'];
         $description = $data['description'] ?? null;
+        $category = $data['category'] ?? null;
+
 
             try {
-                $disease = $this->diseaseService->addDdisease($name, $description);
+                $disease = $this->diseaseService->addDisease($name,  $category,$description);
 
                 return new JsonResponse('Disease added successfully: ' . $disease->getName(), 201);
             } catch (\Exception $e) {
@@ -60,4 +67,34 @@ class DiseaseController extends AbstractController
             return new JsonResponse(['error' => $e->getMessage()], 400);
         }
     }
+
+    #[Route('/api/disease/{name}', name: 'find_disease', methods: ['GET'])]
+    public function findDisease(string $name): JsonResponse
+    {
+        $doctor = $this->getUser();
+
+        if (!$doctor instanceof User) {
+            return new JsonResponse(['error' => 'Missing doctor'], 400);
+        }
+
+        $role = $doctor->getRoles();
+
+        if (!in_array('doctor', $role)) {
+            return new JsonResponse(['error' => 'Unauthorized - Only doctors can search disease'], 403);
+        }
+        try {
+            $disease = $this->diseaseService->findDisease($name);
+
+            if (!$disease) {
+                return new JsonResponse(['error' => 'Disease not found'], 404);
+            }
+
+            $serializedDisease = $this->diseaseService->serializePatient($disease);
+
+            return new JsonResponse(json_decode($serializedDisease), 200);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => $e->getMessage()], 400);
+        }
+    }
+
 }

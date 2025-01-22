@@ -33,10 +33,10 @@ class RegistrationController extends AbstractController
     {
         $user = $this->getUser();
 
-        if(!$user  instanceof User)     
+        if(!$user  instanceof User)
         {
             return new JsonResponse (['error' => 'Missing user'], 400);
-        }          
+        }
 
         $role = $user->getRoles();
 
@@ -45,22 +45,22 @@ class RegistrationController extends AbstractController
         }
 
         $data = json_decode($request->getContent(), true);
-       
-        if (isset($data['role']) && $data['role'] === 'doctor') {
+
+    if (isset($data['roles']) && !(in_array('admin', $data['roles'])))   {
             $constraints = new Assert\Collection([
                 'email' => [new Assert\NotBlank(), new Assert\Email()],
-                'password' => [new Assert\NotBlank(), new Assert\Length(['min' => 8])],
-                'role' => [new Assert\NotBlank()],
+                'password' => [new Assert\NotBlank(), new Assert\Length(['min' => 15])],
+                'roles' => [new Assert\NotBlank()],
                 'cnp' => [new Assert\NotBlank(), new Assert\Length(['min' => 13, 'max' => 13]), new Assert\Regex('/^\d{13}$/')],
                 'firstName' => [new Assert\NotBlank()],
                 'lastName' => [new Assert\NotBlank()],
                 'specialization' => [new Assert\NotBlank()]
             ]);
-        }else if(isset($data['role']) && $data['role'] === 'admin') {
+        }else  {
             $constraints = new Assert\Collection([
                 'email' => [new Assert\NotBlank(), new Assert\Email()],
                 'password' => [new Assert\NotBlank(), new Assert\Length(['min' => 8])],
-                'role' => [new Assert\NotBlank()]
+                'roles' => [new Assert\NotBlank()]
             ]);
         }
 
@@ -79,9 +79,13 @@ class RegistrationController extends AbstractController
             if (isset($data['specialization'])) {
                 $specialization = $this->specializationService->getSpecialization($data['specialization']);
                 if (!$specialization) {
-                    throw new \Exception('Specialization not found.');
-                }
+                    $specialization = $this->specializationService->addSpecialization($data['specialization']);
+                    if (!$specialization) {
+                        throw new \Exception('Could not automatically create specialization. Please create the specialization manually first.');
+                    }
+                    }
             }
+          $roles= $data['roles'];
 
             $response = $this->registerService->register(
                 $data['email'],
@@ -90,7 +94,39 @@ class RegistrationController extends AbstractController
                 $data['firstName'] ?? null,
                 $data['lastName'] ?? null,
                 $specialization ?? null,
-                $data['role']
+                $roles
+            );
+
+            return new JsonResponse($response, 201);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => $e->getMessage()], 400);
+        }
+    }
+
+    #[Route('/register/patient', name: 'register_patient', methods: ['POST'])]
+    public function registerPatient(Request $request): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+       
+            $constraints = new Assert\Collection([
+                'email' => [new Assert\NotBlank(), new Assert\Email()],
+                'password' => [new Assert\NotBlank(), new Assert\Length(['min' => 8])]            ]);
+        
+
+        $violations = $this->validator->validate($data, $constraints);
+
+        if (count($violations) > 0) {
+            $errors = [];
+            foreach ($violations as $violation) {
+                $errors[] = $violation->getPropertyPath() . ': ' . $violation->getMessage();
+            }
+            return new JsonResponse(['errors' => $errors], 400);
+        }
+
+        try {
+            $response = $this->registerService->registerPatient(
+                $data['email'],
+                $data['password']
             );
 
             return new JsonResponse($response, 201);
@@ -138,7 +174,8 @@ class RegistrationController extends AbstractController
             return new JsonResponse(['error' => 'Unauthorized - No authenticated user'], 401);
         }
 
-        return new JsonResponse([
+        if (in_array('doctor', $user->getRoles())) {
+            return new JsonResponse([
             'id' => $user->getEmail(),
             'email' => $user->getEmail(),
             'roles' => $user->getRoles(),
@@ -146,7 +183,15 @@ class RegistrationController extends AbstractController
             'lastName' => $user->getLastName(),
             'specialization' => $user->getSpecialization()->getName(),  
         ]);
+    }else  {
+            return new JsonResponse([
+                'id' => $user->getEmail(),
+                'email' => $user->getEmail(),
+                'roles' => $user->getRoles(),
+            ]);
+        }
     }
+
 
     #[Route(path: '/api/logout', name: 'api_logout', methods: ['POST'])]
     public function logout(): JsonResponse

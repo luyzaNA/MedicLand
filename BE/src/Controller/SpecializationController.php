@@ -48,6 +48,7 @@ class SpecializationController extends AbstractController
 
         try {
             $name = $data['name'] ?? null;
+
             $specialization = $this->specializationService->addSpecialization($name);
 
             return new JsonResponse(['name' => $specialization->getName()], 201);
@@ -74,5 +75,15 @@ class SpecializationController extends AbstractController
         } catch (\Exception $e) {
             return new JsonResponse(['error' => $e->getMessage()], 400);
         }
+    }
+
+    #[Route('/specializations', name: 'get_all_specializations', methods: ['GET'])]
+    public function getAllSpecializations(): JsonResponse
+    {
+        $specializations = $this->specializationService->getAllSpecializations();
+
+        $specializationsJson = $this->specializationService->serializeSpecializations($specializations);
+
+        return new JsonResponse($specializationsJson, 200, [], true);
     }
 }

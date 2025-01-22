@@ -1,0 +1,74 @@
+<body>
+    <form (ngSubmit)="onSearch()" #searchForm="ngForm" method="GET">
+        <h2>Search Patient</h2>
+
+        <div class="search-input">
+            <span class="title">CNP:</span>
+            <input type="text" id="cnp" name="cnp" [(ngModel)]="cnp" class="search" required placeholder="e.g., 1234567890123">
+            <button type="submit" [disabled]="searchForm.invalid" class="btn-search">Search</button>
+        </div>
+    </form>
+
+    <div class="container" id="content">
+        <h1>PATIENT REPORT</h1>
+
+        <div class="info-category" id="personal-info">
+            <div class="section">Personal Info:</div>
+            <div class="name-row">
+                <div class="title">Name:</div>
+                <input type="text" id="firstName" class="column-name" name="firstName" [value]="patient.firstName + ' ' + patient.lastName" disabled readonly>
+                <span class="title">CNP:</span>
+                <input type="text" id="cnp" [value]="patient.cnp" name="cnp" class="cnp-row" disabled readonly/>
+            </div>
+            <div class="contact-row">
+                <div class="title">Email:</div>
+                <input type="email" class="column-contact" id="email" name="email" [value]="patient.email? patient.email : '-'" disabled readonly>
+                <div class="title">Phone:</div>
+                <input type="tel" id="phone" class="column-contact" name="phone" [value]="patient.phone" disabled readonly>
+            </div>
+            <div class="personal-info-row">
+                <span class="title">Birth Date:</span>
+                <input type="text" id="birthDate" [value]="datePipe.transform(patient.birthDate, 'dd.MM.yyyy')" name="birthDate" class="cnp-row" disabled readonly/>
+                <span class="title">Age:</span>
+                <input type="text" id="age" [value]="patient.age" name="age" class="cnp-row" disabled readonly/>
+                <span class="title">Occupation:</span>
+                <input type="text" id="occupation" [value]="patient.occupation" name="occupation" class="cnp-row" disabled readonly/>
+            </div>
+        </div>
+
+        <div class="info-category" id="medical-info">
+            <div class="section">Medical Info:</div>
+            <div class="medical1-row">
+                <div class="title">BG:</div>
+                <input type="text" class="column-blood" id="bloodGroup" name="bloodGroup" [value]="patient.bloodGroup" disabled readonly>
+                <div class="title">RH:</div>
+                <input type="text" class="column-medicalS" id="rh" name="rh" [value]="patient.rh" disabled readonly>
+                <div class="title">Weight (kg):</div>
+                <input type="text" step="0.1" id="weight" class="column-medicalS" name="weight" [value]="patient.weight" disabled readonly>
+                <div class="title">Height (cm):</div>
+                <input type="text" step="0.1" id="height" class="column-medicalS" name="height" [value]="patient.height" disabled readonly>
+            </div>
+            <div class="title">Allergies:</div>
+            <input id="allergies" name="allergies" class="medical2-row" [value]="patient.allergies ? patient.allergies : '-'" disabled readonly>
+        </div>
+
+        <div class="info-category" id="medical-diseases-history">
+            <div class="section">Medical Diseases History:</div>
+            <input id="diseases" name="diseases" class="medical2-row" [value]="diseases ? diseases : '-'" disabled readonly>
+        </div>
+
+        <div class="signature">
+            <div style="border-bottom: 1px solid black; text-align: center; padding: 10px; width: 100px; margin-right: 300px">Doctor's Signature</div>
+            <div style="border-bottom: 1px solid black; text-align: center; padding: 10px; width: 100px">Patient's Signature</div>
+        </div>
+
+        <div class="footer">
+            <div style="text-align: center; padding: 10px;">
+                Generated on {{ (datePipe.transform(currentDate, 'dd.MM.yyyy'))! }}
+            </div>
+        </div>
+
+    </div>
+    <button *ngIf="patient.cnp" (click)="generatePDF()" class="add-btn">Generate PDF</button>
+
+</body>

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Entity\Specialization;
 use App\Entity\User;
+use App\Repository\PatientRepository;
 use App\Repository\SpecializationRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +20,8 @@ class RegisterService
         private  EntityManagerInterface $entityManager,
         private  JWTTokenManagerInterface $jwtManager,
         private  UserPasswordHasherInterface $passwordHasher,
-        private Security $security
+        private Security $security,
+        private PatientRepository $patientRepository
     ) {}
 
     public function login(array $credentials): ?string
@@ -41,15 +43,30 @@ class RegisterService
         return $this->jwtManager->create($user);
     }
 
-    public function register(string $email, ?string $cnp = null, string $password, ?string $firstName = null, ?string $lastName = null, ?Specialization $specialization = null, string $role): array
+    public function register(string $email, ?string $cnp = null, string $password, ?string $firstName = null, ?string $lastName = null, ?Specialization $specialization = null, array $roles): array
     {
         $user = new User();
         $user->setEmail($email);
         $user->setCnp($cnp);
         $user->setFirstName($firstName);
         $user->setLastName($lastName);
-        $user->setSpecialization($specialization);
-        $user->setRole($role);
+        $user->setSpecialization(specialization: $specialization);
+        $user->setRoles($roles); 
+        $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
+        $user->setPassword($hashedPassword);
+
+        $this->userRepository->save($user);
+
+        return [
+            'status' => 'Account created successfully.',
+        ];        
+    }
+
+    public function registerPatient(string $email, string $password): array
+    {
+        $user = new User();
+        $user->setEmail($email);
+        $user->setRoles(['patient']);
 
         $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
         $user->setPassword($hashedPassword);

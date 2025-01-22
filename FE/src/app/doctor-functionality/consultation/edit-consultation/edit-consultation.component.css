@@ -1,0 +1,275 @@
+.container {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+  }
+
+.consultation{
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #34495e;
+  }
+
+  .doctor-spec{
+    width: 100%;
+  }
+
+  .btn-search{
+    background-color:  #694cbbce;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    font-size: 16px;
+    border-radius: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 20px;
+  }
+  button:hover {
+    background-color: #6a4cbb;
+  }
+
+
+.search{
+   width: 85%;
+
+}
+
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  mat-panel-title {
+    text-align: center;
+    color: #6a4cbb;
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+  }
+
+
+
+  h2{
+    text-align: center;
+    color: #6a4cbb;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+h3{
+  font-weight: bold;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 20px;
+}
+
+
+.name-row, .personal-info-row, .adress2-row, .adress1-row, .contact-row, .medical1-row, .diseases-row{    
+    display: flex;
+    gap: 10px;
+}
+
+.column-name{
+    width: 100%;
+    margin-bottom: 20px;
+ }
+ 
+
+
+ .column-sex{
+    width: 50px;
+    padding: 6px;
+ }
+
+ .column-birthdate{
+    width:120px;
+ }
+
+ .column-age{
+    width:80px;
+ }
+
+ .column-occupation{
+    width: 90%;
+ }
+
+.column-adress2{
+    width: 40%;
+
+}
+
+.column-medicalS{
+    width: 33%;
+    margin-bottom: 20px;     
+}
+
+.column-medicalM{
+    width: 49%;
+    margin-bottom: 20px;     
+
+}
+
+.column-blood{
+    width: 15%;
+    margin-bottom: 20px;     
+
+}
+.medical2-row{
+    display: flex;
+    width: 100%;
+}
+
+.diseases-name{
+    width: 70%;
+    margin-bottom: 20px;     
+
+}
+
+.diseases-category{
+    width: 30%;
+    margin-bottom: 20px;     
+
+}
+
+
+.diseases-description{
+    width: 100%;
+}
+
+
+
+
+
+.medical2-row{
+    display: flex;
+    width: 100%;
+}
+
+.diseases-name{
+    width: 70%;
+    margin-bottom: 20px;     
+
+}
+
+.diseases-category{
+    width: 30%;
+    margin-bottom: 20px;     
+
+}
+
+.diseases-description{
+    width: 100%;
+}
+
+
+.add-disease{
+    width: 100px;
+    padding: 14px;
+    background-color: white;
+    color: #6a4cbb;;
+    font-size: 12px;
+    border: 1px solid #6a4cbb ;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 600px;
+    margin-top: 10px;
+    border-radius: 2px;
+    margin-bottom: 25px;
+}
+
+
+
+.add-disease:disabled {
+    background-color: #acabae67;
+    cursor: default;
+    color: black;
+    border: none;
+  }
+
+  .add-disease:hover:not(:disabled) {
+    background-color: #5a3da6;
+    color: white;
+
+}
+
+.add-btn {
+    width: 100%;
+    height: 50px;
+    padding: 14px;
+    background-color: #6a4cbb;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .add-btn:disabled {
+    background-color: #bbb;
+    cursor: default;
+  }
+
+  .add-btn:hover:not(:disabled) {
+    background-color: #5a3da6;
+  }
+
+  .info1{
+    background-color: white;
+    
+}
+
+.info2{
+    background-color: rgba(255, 255, 255, 0.116);
+}
+
+
+.exp1{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.symptoms{
+  margin: 0px!important; ;
+
+}
+
+.medication{
+  margin: 0px!important; ;
+}
+
+mat-expansion-panel input, select{
+    background-color: #edededb7;
+    color: #48466fa2;
+
+}
+.diseases-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.diseases-table th, .diseases-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.diseases-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}

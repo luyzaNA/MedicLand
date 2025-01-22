@@ -1,0 +1,58 @@
+<body>
+
+    <form (ngSubmit)="onSearch()" #searchForm="ngForm" method="GET">
+        <h2>Search Patient</h2>
+
+        <label for="cnp">CNP:</label>
+        <input type="text" id="cnp" name="cnp" [(ngModel)]="cnp" class="search" required placeholder="e.g., 1234567890123">
+
+        <button type="submit" [disabled]="searchForm.invalid" class="btn-search">Search</button>
+    </form>
+
+    <table *ngIf="patient && consultations.length > 0">
+        <h2 class="consultation">Consultation Details</h2>
+
+        <tr>
+            <th>Consultation Details</th>
+            <th>Doctor Details</th>
+            <th>Patient Details</th>
+        </tr>
+
+        <tr *ngFor="let consultation of consultations">
+            <td>
+                <strong>ID:</strong> {{ consultation.id }}<br>
+                <strong>Date of Consultation:</strong> {{ consultation.date | date: 'dd MMMM yyyy' }}<br>
+                <strong>Medication:</strong> {{ consultation.medication }}<br>
+                <strong>Symptoms:</strong> {{ consultation.symptoms }}<br>
+                <strong>Diagnostic:</strong> 
+                <ul>
+                    <li *ngFor="let disease of consultation.diagnostic">{{ disease.category }} - {{ disease.name }}</li>
+                </ul>
+            </td>
+            <td>
+                <strong>Doctor Name:</strong> {{ consultation.doctorFirstName + ' ' + consultation.doctorLastName }}<br>
+                <strong>Email:</strong> {{ consultation.doctorEmail }}<br>
+                <strong>Specialization:</strong> {{ consultation.doctorSpecializationName }}
+            </td>
+            <td>
+                <strong>CNP:</strong> {{ consultation.patientCnp }}<br>
+                <strong>Name:</strong> {{ consultation.patientFirstName }} {{ consultation.patientLastName }}<br>
+                <strong>Phone:</strong> {{ consultation.patientPhone }}<br>
+                <strong>Email:</strong> {{ consultation.patientEmail ? consultation.patientEmail : ' - ' }}<br>
+                <strong>Date of Birth:</strong> {{ consultation.patientBirthDate | date: 'dd MMMM yyyy' }}<br>
+                <strong>Age:</strong> {{ consultation.patientAge }} years<br>
+                <strong>Address:</strong> {{ consultation.patientAddress }}, {{ consultation.patientLocality }}<br>
+                <strong>Blood Group:</strong> {{ consultation.patientBloodGroup }}, {{ consultation.patientRh }}<br>
+                <strong>Weight:</strong> {{ consultation.patientWeight }} kg<br>
+                <strong>Height:</strong> {{ consultation.patientHeight }} cm<br>
+                <strong>Allergies:</strong> {{ consultation.patientAllergies }}<br>
+                <strong>Medical History:</strong>
+                <ul>
+                    <li *ngFor="let disease of consultation.patientDiseases">{{ disease.category }} - {{ disease.name }}</li>
+                </ul>
+            </td>
+        </tr>
+
+    </table>
+
+</body>

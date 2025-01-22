@@ -1,0 +1,23 @@
+<app-navigation-bar></app-navigation-bar>
+<div class="image-slider">
+  <div class="slider-container" [ngStyle]="{'transform': 'translateX(-' + currentSlide * 100 + '%)'}">
+    <mat-card *ngFor="let image of sliderImages" class="slider-item">
+      <img mat-card-image [src]="image.url" [alt]="image.alt" />
+    </mat-card>
+  </div>
+
+  <button mat-icon-button class="slider-control prev" (click)="prevSlide()">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <button mat-icon-button class="slider-control next" (click)="nextSlide()">
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>
+<section class="about-us">
+    <div class="container">
+      <h2>About Us</h2>
+      <p>Welcome to our medical clinic’s website. We are dedicated to providing comprehensive healthcare services while leveraging the power of data management to ensure efficient and personalized patient care. Our clinic specializes in a wide range of medical specialties, and we pride ourselves on using the latest technologies to enhance patient experiences.</p>
+      <p>With a wide range of medical specialties, including Cardiology, Pneumology, Gastroenterology, Neurology, and more, we offer tailored solutions to meet each patient's unique needs. Whether it's a routine check-up, ongoing treatment, or a complex diagnosis, we are here to provide expert care every step of the way.</p>
+    </div>
+  </section>
+<app-specialization-doctor>aici</app-specialization-doctor>

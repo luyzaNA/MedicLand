@@ -1,0 +1,77 @@
+<body>
+    <h2>List of patients</h2>
+
+    <div class="filters">
+        <label>
+            Name:
+            <input type="text" [(ngModel)]="filterName" (input)="applyFilters()" placeholder="Search by" />
+            <span (click)="clearFilter('filterName')" class="clear-icon">X</span>
+        </label>
+
+        <label>
+            Rh Factor:
+            <select [(ngModel)]="filterRh" (change)="applyFilters()">
+                <option *ngFor="let rh of rhOptions" [value]="rh">{{ rh }}</option>
+            </select>
+        </label>
+
+        <label>
+            Blood Group:
+            <select [(ngModel)]="filterBloodGroup" (change)="applyFilters()">
+                <option *ngFor="let group of bloodGroupOptions" [value]="group">{{ group }}</option>
+            </select>
+        </label>
+
+        <label>
+            Sex:
+            <select [(ngModel)]="filterSex" (change)="applyFilters()">
+                <option *ngFor="let sex of sexOptions" [value]="sex">{{ sex }}</option>
+            </select>
+        </label>
+
+        <label>
+            Occupation:
+            <input type="text" [(ngModel)]="filterOccupation" (input)="applyFilters()" placeholder="Search" />
+            <span (click)="clearFilter('filterOccupation')" class="clear-icon">X</span>
+        </label>
+
+        <label>
+            CNP:
+            <input type="text" [(ngModel)]="filterCnp" (input)="applyFilters()" placeholder="Search" />
+            <span (click)="clearFilter('filterCnp')" class="clear-icon">X</span>
+        </label>
+
+        <button (click)="clearFilters()" class="clear-button">Clear Filters</button>
+    </div>
+
+    <table *ngIf="patients.length > 0" class="patients-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Sex</th>
+                <th>Blood Group</th>
+                <th>Rh</th>
+                <th>Allergies</th>
+                <th>Occupation</th>
+                <th>CNP</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let patient of patients">
+                <td>{{ patient.fullName }}</td>
+                <td>{{ patient.age }}</td>
+                <td>{{ patient.sex }}</td>
+                <td>{{ patient.bloodGroup }}</td>
+                <td>{{ patient.rh }}</td>
+                <td>{{ patient.allergies }}</td>
+                <td>{{ patient.occupation }}</td>
+                <td>{{ patient.cnp }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="patients.length === 0" class="no-entries">
+        <p>No patients found</p>
+    </div>
+</body>

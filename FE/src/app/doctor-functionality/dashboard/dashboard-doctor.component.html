@@ -1,0 +1,57 @@
+<div class="dashboard">
+  <div class="greeting">
+    <h1>Hello, doctor {{ name }}!</h1>
+    <p>Your tools are ready. Select a task to continue.</p>
+  </div>
+
+  <div class="options">
+    <div class="option" routerLink="./Patients">
+      <video
+        src="../../assets/doctor/patient.mp4"
+        type="video/mp4"
+        loop
+        autoplay
+        [muted]="true"
+      >
+
+      </video>
+      <p>Patients</p>
+    </div>
+    <div class="option" routerLink="./Consultations">
+      <video
+        src="../../assets/doctor/consultation.mp4"
+        type="video/mp4"
+        loop
+        autoplay
+        [muted]="true"
+      >
+      </video>
+      <p>Consultations</p>
+    </div>
+
+    <div class="option" routerLink="./Reports">
+      <video
+        src="../../assets/doctor/report.mp4"
+        type="video/mp4"
+        loop
+        autoplay
+        [muted]="true"
+      >
+      </video>
+      <p>Reports</p>
+    </div>
+
+    <div class="option" routerLink="./Statistic">
+      <video
+        src="../../assets/doctor/statisctic.mp4"
+        type="video/mp4"
+        loop
+        autoplay
+        [muted]="true"
+      >
+      </video>
+      <p>Statistics</p>
+    </div>
+  </div>
+</div>
+
